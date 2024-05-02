@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAuthStore } from '../stores/authStore'
-import { useRouter } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -35,7 +35,18 @@ function logout() {
         >
           À propos
         </RouterLink>
-
+        <RouterLink
+          class="nav-link"
+          :class="{ active: $route.name == 'Question' }"
+          :to="{ name: 'Question' }"
+          >Question</RouterLink
+        >
+        <RouterLink
+          class="nav-link"
+          :class="{ active: $route.name == 'Time' }"
+          :to="{ name: 'Time' }"
+          >Timer</RouterLink
+        >
         <!-- La page Profile n'est accessible que si l'utilisateur est connecté (v-if). Voir la propriété calculée isLoggedIn() qui retourne la valeur de la propriété isLoggedIn du store. -->
         <RouterLink
           class="nav-link"
@@ -48,9 +59,7 @@ function logout() {
       </div>
       <div class="d-flex">
         <div class="navbar-nav ml-auto">
-          <a class="nav-link" @click="logout" v-if="isLoggedIn" href="#">
-            Se déconnecter
-          </a>
+          <a class="nav-link" @click="logout" v-if="isLoggedIn" href="#"> Se déconnecter </a>
           <RouterLink
             v-else
             class="nav-link"
