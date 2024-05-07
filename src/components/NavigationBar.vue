@@ -41,12 +41,7 @@ function logout() {
           :to="{ name: 'Question' }"
           >Question</RouterLink
         >
-        <RouterLink
-          class="nav-link"
-          :class="{ active: $route.name == 'Time' }"
-          :to="{ name: 'Time' }"
-          >Timer</RouterLink
-        >
+
         <!-- La page Profile n'est accessible que si l'utilisateur est connecté (v-if). Voir la propriété calculée isLoggedIn() qui retourne la valeur de la propriété isLoggedIn du store. -->
         <RouterLink
           class="nav-link"

@@ -28,11 +28,7 @@ const routes = [
     name: 'Question',
     component: () => import('../views/QuestionView.vue')  
   },
-  {
-    path: '/timer',
-    name: 'Timer',
-    component: () => import('../views/TimeView.vue')
-  },
+
   {
     path: '/login',
     name: 'Login',
