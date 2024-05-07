@@ -30,13 +30,6 @@ function logout() {
         </RouterLink>
         <RouterLink
           class="nav-link"
-          :class="{ active: $route.name == 'About' }"
-          :to="{ name: 'About' }"
-        >
-          À propos
-        </RouterLink>
-        <RouterLink
-          class="nav-link"
           :class="{ active: $route.name == 'Question' }"
           :to="{ name: 'Question' }"
           >Question</RouterLink
