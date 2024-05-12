@@ -1,8 +1,9 @@
 import { parseAxiosError } from '../shared/parseAxiosError'
 import axiosAuth from '../shared/axiosAuth'
-import bcrypt from 'bcrypt';
 
 const url = `http://127.0.0.1:3000/users`
+const { scryptSync, randomBytes } = await import('crypto') //
+
 
 async function getUserById(userId: string) {
   try {
@@ -46,9 +47,13 @@ async function getUsersList() {
 }
 async function createUser(user: any) {
   try {
-    const encryptedPassword = await bcrypt.hash(user.password, 10) as string
+    const salt = randomBytes(8).toString('hex')
+    const encryptedPassword = scryptSync(user.password, salt, 64).toString('hex')
+    
+    console.log(encryptedPassword)
+
     user.password = encryptedPassword
-    await axiosAuth.post(`http://127.0.0.1:3000/users`, user)
+    await axiosAuth.post(`http://127.0.0.1:3000/users`, {user.email, user.password, user.name, user.role})
   }
   catch (error) {
     throw parseAxiosError(error)
