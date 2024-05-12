@@ -11,11 +11,6 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/AboutView.vue')
-  },
-  {
     path: '/profile',
     name: 'Profile',
     component: ProfileView,
@@ -38,6 +33,12 @@ const routes = [
     name: 'NotFound',
     component: () => import('../views/NotFoundView.vue')
   },
+  {
+    path : "/change-Credentials/:form",
+    name : "ChangeCredentials",
+    component : () => import('../views/ChangeCredentials.vue'),
+    props: true
+  }
 
 
 ]

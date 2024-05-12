@@ -6,38 +6,39 @@ import { useAuthStore } from '../stores/authStore'
 import { useRouter } from 'vue-router'
 
 // Définir les règles de validation
-defineRule('isRequired', required);
+defineRule('isRequired', required)
 
-const router = useRouter();
-const authStore = useAuthStore();
-const email = ref('');
-const password = ref('');
+const router = useRouter()
+const authStore = useAuthStore()
+const email = ref('')
+const password = ref('')
 
-const authServiceError = computed(() => authStore.authServiceError);
+const authServiceError = computed(() => authStore.authServiceError)
 
 onMounted(() => {
-  authStore.clearError();
-});
+  authStore.clearError()
+})
 
 const login = async () => {
   // Validation manuelle avant la soumission
-  const result = await validate({},{},{});
+  const result = await validate({})
+
   if (!result.valid) {
-    return; // Arrête la fonction si la validation échoue
+    return // Arrête la fonction si la validation échoue
   }
 
   await authStore.login({
     email: email.value,
     password: password.value
-  });
-  
+  })
+
   if (!authStore.authServiceError) {
-    router.push({ name: 'Profile' });
+    router.push({ name: 'Profile' })
   }
-};
+}
 
 // Fonction pour vérifier si un champ est vide, utilisée dans les règles de vee-validate
-const isRequired = value => !value ? 'Ce champ est requis.' : true;
+const isRequired = (value) => (!value ? 'Ce champ est requis.' : true)
 </script>
 
 <template>
