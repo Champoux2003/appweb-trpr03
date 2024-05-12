@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, ref } from 'vue'
 import { useProfileStore } from '../stores/profileStore'
 import { RouterLink } from 'vue-router'
 
@@ -7,7 +7,11 @@ const profileStore = useProfileStore()
 
 const name = computed(() => profileStore.name)
 const email = computed(() => profileStore.email)
+const role = computed(() => profileStore.role)
 const onError = computed(() => profileStore.onError)
+
+const editingName = ref(false)
+const newName = ref('')
 
 onMounted(async () => {
   try {
@@ -20,17 +24,32 @@ onMounted(async () => {
     confirm("Erreur critique lors de l'accès au store.")
   }
 })
+
+const saveName = () => {
+  profileStore.updateProfileName(newName.value)
+  editingName.value = false
+}
+
+const cancelEdit = () => {
+  editingName.value = false
+}
 </script>
 
 <template>
   <div>
     <h1>Profile</h1>
     <div>
-      <p>Nom: {{ name }} <button class="btn btn-primary">⚙️</button></p>
+      <p v-if="!editingName">
+        Nom: {{ name }} <button class="btn btn-primary" @click="editingName = true">⚙️</button>
+      </p>
+      <p v-else>
+        <input type="text" v-model="newName" :placeholder="name" />
+        <button class="btn btn-primary" @click="saveName">Sauvegarder</button>
+        <button class="btn btn-secondary" @click="cancelEdit">Annuler</button>
+      </p>
     </div>
-    <input type="text" v-model="name" placeholder="Nouveau nom" />
     <div>Courriel: {{ email }}</div>
-    <div>Rôle:</div>
+    <div>Rôle: {{ role }}</div>
     <RouterLink
       :class="{ active: $route.name == 'ChangeCredentials' }"
       :to="{ name: 'ChangeCredentials', params: { form: 'password' } }"
