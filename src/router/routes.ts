@@ -3,7 +3,6 @@ import ProfileView from '../views/ProfileView.vue'
 import LoginView from '../views/LoginView.vue'
 
 
-
 const routes = [
   {
     path: '/',
@@ -29,6 +28,11 @@ const routes = [
     component: LoginView
   },
   {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/RegisterView.vue')
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('../views/NotFoundView.vue')
@@ -39,8 +43,6 @@ const routes = [
     component : () => import('../views/ChangeCredentials.vue'),
     props: true
   }
-
-
 ]
 
 export default routes

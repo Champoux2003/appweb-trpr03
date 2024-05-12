@@ -21,7 +21,7 @@ onMounted(() => {
 
 const login = async () => {
   // Validation manuelle avant la soumission
-  const result = await validate({})
+  const result = await validate({},{},{})
 
   if (!result.valid) {
     return // Arrête la fonction si la validation échoue
@@ -38,7 +38,7 @@ const login = async () => {
 }
 
 // Fonction pour vérifier si un champ est vide, utilisée dans les règles de vee-validate
-const isRequired = (value) => (!value ? 'Ce champ est requis.' : true)
+const isRequired = (value : any) => (!value ? 'Ce champ est requis.' : true)
 </script>
 
 <template>

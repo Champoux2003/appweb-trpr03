@@ -4,69 +4,14 @@
       "email": "test@test.com",
       "password": "$2a$10$/U4TD6TdllwpkXLdBzoagepGDpOGcRFTS6VHAnYGNeCKsuhpEWmX2",
       "name": "Emmett Brown",
-      "id": 1,
-      "role": "Teacher"
-    },
-    {
-      "email": "admin@admin.com",
-      "password":"$2a$12$95krExPGgZ.B.ixq4RpsI.9pLIKQ8jededRLe5HfwaLcMLhMEjN.2",
-      "name": "Admin Admin",
-      "id": 2,
-      "role":"Teacher"
-    },
-    {
-      "email": "stud@stud.com",
-      "password":"$2a$12$CbwjEOH13WpIAQOdQVzPyuq27SLkngBVXayWZ4FfZ/4PURt2fTs5q",
-      "name": "Student Student",
-      "id": 3,
-      "role":"Student"
-    },
-    {
-      "email": "Shampoo@thebottle.com",
-      "password":"$2a$12$1g6V2krsiMcy4KjAXwCW6OLHtYUR/YVWEGJgpFFcgUrgdZEwr1O/S", 
-      "name": "Shampoo Bottle",
-      "id": 4,
-      "role":"Student"
+      "id": 1
     }
   ],
   "comments": [
     {
-      "userId": 4,
+      "userId": 1,
       "comment": "J'ai inventé la machine à voyager dans le temps.",
       "id": 1
     }
-  ], 
-  "questions":[
-    {
-      "userId": 3,
-      "question": "Comment fonctionne la machine à voyager dans le temps ?",
-      "priority": "4",
-      "id": 1
-    },
-    {
-      "userId": 4,
-      "question": "Quel est le principe de la machine à voyager dans le temps ?",
-      "priority": "3",
-      "id": 2
-    },
-    {
-      "userId": 3,
-      "question": "Quel est le nom du professeur qui a inventé la machine à voyager dans le temps ?",
-      "priority": "4",
-      "id": 3
-    },
-    {
-      "userId": 4,
-      "question": "Quel est le nom du professeur machine qui a inventé la  à voyager danstemps le  ?",
-      "priority": "5",
-      "id": 4
-    },
-    {
-      "userId": 4,
-      "question": "Pourquoi je suis un shampoing ?",
-      "priority": "2",
-      "id": 5
-    }
-
   ]
 }
