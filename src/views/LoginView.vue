@@ -21,7 +21,7 @@ onMounted(() => {
 
 const login = async () => {
   // Validation manuelle avant la soumission
-  const result = await validate({});
+  const result = await validate({},{},{});
   if (!result.valid) {
     return; // Arrête la fonction si la validation échoue
   }
