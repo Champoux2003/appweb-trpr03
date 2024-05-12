@@ -13,7 +13,7 @@ export const useAuthStore = defineStore('authStoreId', () => {
   const authServiceError = ref('')
 
   const isLoggedIn = computed(() => !!token.value)
-
+  
   const getUserId = computed(() => {
     if (!token.value) return ''
     const payload: DecodedToken = jwtDecode(token.value)

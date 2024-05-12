@@ -42,6 +42,11 @@ const routes = [
     name : "ChangeCredentials",
     component : () => import('../views/ChangeCredentials.vue'),
     props: true
+  },
+  {
+    path : "/classe",
+    name : "Classe",
+    component : () => import('../views/Classroom.vue')
   }
 ]
 

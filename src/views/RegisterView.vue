@@ -69,15 +69,13 @@ const register = async () => {
     await userService.createUser(newUser)
 
     if (!authStore.authServiceError) {
-        router.push({ name: 'Profile' })
+        router.push({ name: 'Home' })
     }
 }
-
-
 </script>
 <template>
     <div>
-        <h1>Inscription</h1>
+        <h1>Ajouter un étudiant</h1>
         <div class="container my-5">
             <div class="row justify-content-center">
                 <!-- avec VeeValidate on utilise Form au lieu de form et pas de .prevent comme dans l'exemple de Vue Router.... -->

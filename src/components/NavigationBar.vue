@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useAuthStore } from '../stores/authStore'
+import { userService } from '../services/userService'
 import { RouterLink, useRouter } from 'vue-router'
+import { useProfileStore } from '../stores/profileStore'
 
 const authStore = useAuthStore()
+const profileStore = useProfileStore()
+
 const router = useRouter()
 
-const isLoggedIn = computed(() => authStore.isLoggedIn)
+const isLoggedIn = computed(() => authStore.isLoggedIn) ?? false
+
+const isTeacher = computed(() => profileStore.role === 'teacher') ?? false
 
 function logout() {
   authStore.logout()
@@ -34,16 +40,20 @@ function logout() {
           :to="{ name: 'Profile' }">
           Profile
         </RouterLink>
+        <RouterLink v-if="isLoggedIn && isTeacher" class="nav-link" :class="{ active: $route.name == 'Register' }"
+          :to="{ name: 'Register' }">
+          Ajouter un étudiant
+        </RouterLink>
+        <RouterLink v-if="isLoggedIn && isTeacher" class="nav-link" :class="{ active: $route.name == 'Classe' }"
+          :to="{ name: 'Classe' }">
+          Classe
+        </RouterLink>
       </div>
       <div class="d-flex">
         <div class="navbar-nav ml-auto">
           <a class="nav-link" @click="logout" v-if="isLoggedIn" href="#"> Se déconnecter </a>
           <RouterLink v-else class="nav-link" :class="{ active: $route.name == 'Login' }" :to="{ name: 'Login' }">
             Connexion
-          </RouterLink>
-          <a class="nav-link" @click="" v-if="isLoggedIn" href=""></a>
-          <RouterLink v-else class="nav-link" :class="{ active: $route.name == 'Register' }" :to="{ name: 'Register' }">
-            Inscription
           </RouterLink>
         </div>
       </div>

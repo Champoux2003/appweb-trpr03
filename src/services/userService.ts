@@ -1,12 +1,19 @@
 import { parseAxiosError } from '../shared/parseAxiosError'
 import axiosAuth from '../shared/axiosAuth'
+import { useAuthStore } from '../stores/authStore'
 
 const url = `http://127.0.0.1:3000/users`
-const { scryptSync, randomBytes } = await import('crypto') //
 
+interface User {
+  email: string,
+  password: string,
+  name: string,
+  role: string
+}
 
 async function getUserById(userId: string) {
   try {
+    const authStore = useAuthStore()
     // axiosAuth est une instance d'axios configurée pour ajouter le JWT à une requête nécessitant une authentification.
     // voir le fichier src/shared/axiosAuth.js
     const response = await axiosAuth.get(
@@ -45,15 +52,10 @@ async function getUsersList() {
     throw parseAxiosError(error)
   }
 }
-async function createUser(user: any) {
-  try {
-    const salt = randomBytes(8).toString('hex')
-    const encryptedPassword = scryptSync(user.password, salt, 64).toString('hex')
-    
-    console.log(encryptedPassword)
 
-    user.password = encryptedPassword
-    await axiosAuth.post(`http://127.0.0.1:3000/users`, {user.email, user.password, user.name, user.role})
+async function createUser(user : User) {
+  try {
+    await axiosAuth.post(`http://127.0.0.1:3000/users`, {email: user.email, password: user.password, name: user.name, role: user.role})
   }
   catch (error) {
     throw parseAxiosError(error)
