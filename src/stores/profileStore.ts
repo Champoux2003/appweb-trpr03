@@ -27,7 +27,7 @@ export const useProfileStore = defineStore('profileStoreId', () => {
       onError.value = true
     }
   }
-
+/*
   async function updateProfile() {
     try {
       onError.value = false
@@ -38,13 +38,16 @@ export const useProfileStore = defineStore('profileStoreId', () => {
       onError.value = true
     }
   }
-
+*/
   async function updateProfileName(newName: string){
     try {
       onError.value = false
       const authStore = useAuthStore()
-      const userId = authStore.getUserId // Assuming getUserId is a computed or a ref inside authStore
-      await userService.updateUserById(userId, { name: newName})
+      console.log("ProfileStore");
+      const userId = authStore.getUserId
+      console.log(userId) // Assuming getUserId is a computed or a ref inside authStore
+      await userService.updateUserById(userId, newName);
+      name.value = newName
     } catch (error) {
       onError.value = true
     }
@@ -56,7 +59,7 @@ export const useProfileStore = defineStore('profileStoreId', () => {
     role,
     onError, 
     getProfile,
-    updateProfile,
+    //updateProfile,
     updateProfileName
   }
 })

@@ -6,7 +6,7 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
   const questions = ref([]);
   const onError = ref(false);
 
-  function _initializeQuestions(questionsList) {
+  function _initializeQuestions(questionsList : any) {
     questions.value = questionsList;
     onError.value = false;
   }
