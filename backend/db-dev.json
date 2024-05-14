@@ -6,27 +6,6 @@
       "name": "Emmett Brown",
       "id": 1,
       "role": "teacher"
-    },
-    {
-      "email": "student@student.com",
-      "password": "$2a$10$I2IdSZPpZ.bP/zdUm8m4fu7ioZM/tjhRBalE0VRIXu73CR0Cw.iCS",
-      "name": "student1",
-      "role": "student",
-      "id": 2
-    },
-    {
-      "email": "student2@student.com",
-      "password": "$2a$10$s8JT39ozVNfo0CsyakzL5uqZmiblCUhiYlD3bCgn/ztGJTtrJnAea",
-      "name": "student2",
-      "role": "student",
-      "id": 3
-    },
-    {
-      "email": "student3@student.com",
-      "password": "$2a$10$IVXMTCirn3N7d6gWVVFPvOz4uwyIt7NowxS2XIG2EwOvTrq7wcFsm",
-      "name": "student3",
-      "role": "student",
-      "id": 4
     }
   ],
   "comments": [

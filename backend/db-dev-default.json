@@ -5,7 +5,8 @@
       "password": "$2a$10$/U4TD6TdllwpkXLdBzoagepGDpOGcRFTS6VHAnYGNeCKsuhpEWmX2",
       "name": "Emmett Brown",
       "id": 1,
-      "role": "teacher"
+      "role": "teacher",
+      "health": 100
     }
   ],
   "comments": [
