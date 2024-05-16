@@ -38,6 +38,9 @@ POST http://127.0.0.1:3000/questions
 Authorization: Bearer REMPLACER_PAR_JETON_NON_EXPIRÉ_UTILISATEUR_1
 Content-type: application/json
 
+DELETE http://127.0.0.1:3000/questions/1
+
+
 {
   "userId": 1,
   "comment": "Un commentaire de l'utilisateur 1"
@@ -68,7 +71,6 @@ PUT http://127.0.0.1:3000/users/1
 ### Tentative d'accès à une ressource de l'utilisateur 1 par l'utilisateur 2
 GET http://127.0.0.1:3000/users/2
 Authorization: Bearer REMPLACER_PAR_JETON_NON_EXPIRÉ_UTILISATEUR_1
-
 
 
 

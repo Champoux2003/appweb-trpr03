@@ -52,6 +52,16 @@ export const useProfileStore = defineStore('profileStoreId', () => {
       onError.value = true
     }
   }
+  async function deleteProfile() {
+    try {
+      onError.value = false
+      const authStore = useAuthStore()
+      const userId = authStore.getUserId // Assuming getUserId is a computed or a ref inside authStore
+      await userService.deleteUser(userId)
+    } catch (error) {
+      onError.value = true
+    }
+  }
 
   return { 
     email, 
@@ -59,7 +69,7 @@ export const useProfileStore = defineStore('profileStoreId', () => {
     role,
     onError, 
     getProfile,
-    //updateProfile,
-    updateProfileName
+    updateProfileName,
+    deleteProfile
   }
 })

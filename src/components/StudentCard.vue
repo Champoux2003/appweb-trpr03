@@ -50,26 +50,23 @@ onMounted(async () => {
 }
 
 .red {
-    width: 20%;
-    padding: 10px;
-    background-image: url(/src/assets/red.png);
+  width: 20%;
+  padding: 10px;
+  background-image: url(/src/assets/red.png);
 }
-
 .god {
-    width: 20%;
-    padding: 10px;
-    background-image: url(/src/assets/rainbow.gif);
+  width: 20%;
+  padding: 10px;
+  background-image: url(/src/assets/rainbow.gif);
 }
-
 .green {
-    width: 20%;
-    padding: 10px;
-    background-image: url(/src/assets/green.png);
+  width: 20%;
+  padding: 10px;
+  background-image: url(/src/assets/green.png);
 }
-
 .yellow {
-    width: 20%;
-    padding: 10px;
-    background-image: url(/src/assets/yellow.png);
+  width: 20%;
+  padding: 10px;
+  background-image: url(/src/assets/yellow.png);
 }
 </style>
