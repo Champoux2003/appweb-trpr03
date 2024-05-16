@@ -5,14 +5,16 @@
       "password": "$2a$10$/U4TD6TdllwpkXLdBzoagepGDpOGcRFTS6VHAnYGNeCKsuhpEWmX2",
       "name": "Emmett Brown",
       "id": 1,
-      "role": "teacher"
+      "role": "teacher",
+      "health": 100
     },
     {
       "email": "stud@stud.com",
       "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
       "name": "Shapoo",
+      "id": 2,
       "role": "student",
-      "id": 2
+      "health": 50
     }
   ],
   "questions": [

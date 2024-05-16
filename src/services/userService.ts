@@ -8,7 +8,8 @@ interface User {
   email: string,
   password: string,
   name: string,
-  role: string
+  role: string,
+  health: number,
 }
 
 async function getUserById(userId: string) {
@@ -56,7 +57,7 @@ async function getUsersList() {
 
 async function createUser(user : User) {
   try {
-    await axiosAuth.post(`http://127.0.0.1:3000/users`, {email: user.email, password: user.password, name: user.name, role: user.role})
+    await axiosAuth.post(`http://127.0.0.1:3000/users`, {email: user.email, password: user.password, name: user.name, role: user.role, health: 50})
   }
   catch (error) {
     throw parseAxiosError(error)
