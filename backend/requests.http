@@ -74,4 +74,18 @@ Authorization: Bearer REMPLACER_PAR_JETON_NON_EXPIRÉ_UTILISATEUR_1
 
 
 
+POST http://127.0.0.1:3000/classes
+Authorization: Bearer REMPLACER_PAR_JETON_NON_EXPIRÉ_UTILISATEUR_1
+Content-type: application/json
+{
+  "id": 1,
+  "teacherId": 1,
+  "name": "",
+  "studentsId": [1, 2]
+}
 
+//get a class
+GET http://127.0.0.1:3000/classes/1
+
+//get all classes
+GET http://127.0.0.1:3000/classes

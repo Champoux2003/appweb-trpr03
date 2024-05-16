@@ -15,6 +15,14 @@
       "id": 2,
       "role": "student",
       "health": 50
+    },
+    {
+      "email": "stud2@stud.com",
+      "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
+      "name": "Shampooing",
+      "id": 3,
+      "role": "student",
+      "health": 100
     }
   ],
   "questions": [
@@ -38,12 +46,12 @@
     }
 
   ],
-  "classe": [
+  "classes": [
     {
       "id": 1,
       "teacherId": 1,
       "name": "App Web",
-      "studentsId": []
+      "studentsId": [2, 3]
     }
   ]
 }

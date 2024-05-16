@@ -5,26 +5,19 @@ import { userService } from '@/services/userService';
 import StudentCard from '@/components/StudentCard.vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
+import { useClassStore } from '@/stores/classStore';
 
 // Fetch the students data here
 const router = useRouter()
 const authStore = useAuthStore()
 
-//temporaire va devenir userService.getUsers()
-const users = userService.getUsersList()
-const userList = ref([])
+const classStore = useClassStore()
+const studentsId = ref([])
 
-const students = ref([])    
-/*
-onMounted(() => {
-    for (let i = 0; i < users.length; i++) {
-        if (userList[i].role === 'student') {
-            students.value.push(users[i])
-        }
-    }
+onMounted(async() => {
+    await classStore.getClassById(1)
+    studentsId.value = await classStore.classe.studentsId
 })
-*/
-
 
 
 </script>
@@ -32,12 +25,9 @@ onMounted(() => {
     <div class="classroom">
         <h1>Classe</h1>
        
-        <div v-for="student in students" :key="students.id">
-            <StudentCard :id="id"/>
+        <div v-for="studentId in studentsId" :key="studentId">
+            <StudentCard :id="studentId"/>
         </div>
-        
-
-        
     </div>
 </template>
 <style>

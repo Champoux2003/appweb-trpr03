@@ -1,12 +1,16 @@
 import { defineStore } from 'pinia'
 import { userService } from '../services/userService'
 import { useAuthStore } from './authStore'
+import { ref } from 'vue'
 
 export const useUserStore = defineStore('userStore', () => {
+    const users = ref([])
+    const user = ref(null)
+
 
     async function getUserById(id: number) {
         try {
-            const user = await userService.getUserById(id.toString())
+            user.value = await userService.getUserById(id.toString())
             return user
 
         } catch (error) {
@@ -14,7 +18,7 @@ export const useUserStore = defineStore('userStore', () => {
     }
     async function getUsers() {
         try {
-            const users = await userService.getUsersList()
+            users.value = await userService.getUsersList()
             return users
 
         } catch (error) {
@@ -22,7 +26,8 @@ export const useUserStore = defineStore('userStore', () => {
     }
 
     return {
-        getUserById,
-        getUsers
+        getUsers,
+        users,
+        user
     }
 })
