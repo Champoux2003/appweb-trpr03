@@ -48,7 +48,6 @@ async function getUsersList() {
     const response = await axiosAuth.get(
       `http://127.0.0.1:3000/664/users`)
     return response.data
-
   }
   catch (error) {
     throw parseAxiosError(error)
@@ -64,9 +63,21 @@ async function createUser(user : User) {
   }
 }
 
+async function deleteUser(userId: string) { 
+  try {
+    await axiosAuth.delete(
+      `http://127.0.0.1:3000/users/${userId}`)
+      return true
+  }
+  catch (error) {
+    throw parseAxiosError(error)
+  }
+}
+
 export const userService = {
   getUserById,
   getUsersList,
   updateUserById,
-  createUser
+  createUser,
+  deleteUser,
 }

@@ -2,33 +2,22 @@
   "users": [
     {
       "email": "test@test.com",
-      "password": "$2a$10$QJimJibubyYm18C9NGn.P.qhO.wbGBjrWHs7bQTrV7pjPZDgormQu",
-      "name": "jsfdhjkfhsdjkf",
+      "password": "$2a$12$xYrVIY4FsnJuyg/PRPsCv.w/bAt4nm9CO.MDPd.64GH8LUTa3F7Dq",
+      "name": "Emmett Brown",
+      "id": 1,
       "role": "teacher",
-      "id": 1
+      "health": 100
     },
     {
       "email": "stud@stud.com",
       "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
       "name": "Shapoo",
+      "id": 2,
       "role": "student",
-      "id": 2
+      "health": 50
     }
   ],
-  "questions": [
-    {
-      "userId": "2",
-      "question": "J'ai inventé la machine à voyager dans le temps.",
-      "id": "1",
-      "priority": "1"
-    },
-    {
-      "userId": "2",
-      "question": "J'ai inventé la machine à voyager dans le temps.",
-      "id": "2",
-      "priority": "2"
-    }
-  ],
+  "questions": [],
   "classe": [
     {
       "id": 1,
