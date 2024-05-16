@@ -2,7 +2,7 @@
   "users": [
     {
       "email": "test@test.com",
-      "password": "$2a$10$/U4TD6TdllwpkXLdBzoagepGDpOGcRFTS6VHAnYGNeCKsuhpEWmX2",
+      "password": "$2a$12$xYrVIY4FsnJuyg/PRPsCv.w/bAt4nm9CO.MDPd.64GH8LUTa3F7Dq",
       "name": "Emmett Brown",
       "id": 1,
       "role": "teacher",
@@ -27,16 +27,22 @@
   ],
   "questions": [
     {
-      "userId": "2",
+      "userId": 2,
       "question": "J'ai inventé la machine à voyager dans le temps.",
-      "id": "1",
+      "id": 1,
       "priority": "1" 
     },
     {
-      "userId": "2",
-      "question": "J'ai inventé la machine à voyager dans le temps.",
-      "id": "2",
+      "userId": 2,
+      "question": "J'ai utilisé la machine à voyager dans le temps.",
+      "id": 2,
       "priority": "2" 
+    },
+    {
+      "userId": 2,
+      "question": "J'ai brisé la machine à voyager dans le temps.",
+      "id": 3,
+      "priority": "5" 
     }
 
   ],
