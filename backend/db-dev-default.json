@@ -4,14 +4,48 @@
       "email": "test@test.com",
       "password": "$2a$10$/U4TD6TdllwpkXLdBzoagepGDpOGcRFTS6VHAnYGNeCKsuhpEWmX2",
       "name": "Emmett Brown",
-      "id": 1
+      "id": 1,
+      "role": "teacher",
+      "health": 100
+    },
+    {
+      "email": "stud@stud.com",
+      "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
+      "name": "Shapoo",
+      "id": 2,
+      "role": "student",
+      "health": 50
+    },
+    {
+      "email": "stud2@stud.com",
+      "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
+      "name": "Shampooing",
+      "id": 3,
+      "role": "student",
+      "health": 100
     }
   ],
-  "comments": [
+  "questions": [
     {
-      "userId": 1,
-      "comment": "J'ai inventé la machine à voyager dans le temps.",
-      "id": 1
+      "userId": "2",
+      "question": "J'ai inventé la machine à voyager dans le temps.",
+      "id": "1",
+      "priority": "1" 
+    },
+    {
+      "userId": "2",
+      "question": "J'ai inventé la machine à voyager dans le temps.",
+      "id": "2",
+      "priority": "2" 
+    }
+
+  ],
+  "classes": [
+    {
+      "id": 1,
+      "teacherId": 1,
+      "name": "App Web",
+      "studentsId": [2, 3]
     }
   ]
 }
