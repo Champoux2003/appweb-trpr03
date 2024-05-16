@@ -28,14 +28,15 @@ async function getUserById(userId: string) {
   }
 }
 
-async function updateUserById(userId: string, user: any) {
+async function updateUserById(userId: string, newName:string) {
   try {
-    // axiosAuth est une instance d'axios configurée pour ajouter le JWT à une requête nécessitant une authentification.
-    // voir le fichier src/shared/axiosAuth.js
+    
+    const user = await getUserById(userId) // Await the getUserById function call
     const response = await axiosAuth.put(
       // TODO : utiliser une variable d'environnement pour l'url de l'api rest
-      `http://127.0.0.1:3000/users/${userId}`
+      `http://127.0.0.1:3000/users/${userId}`, {email: user.email, password: user.password, name: newName, role: user.role} // Access the properties of the awaited user object
     )
+    
     return response.data
   } catch (error) {
     throw parseAxiosError(error)
@@ -45,7 +46,7 @@ async function updateUserById(userId: string, user: any) {
 async function getUsersList() {
   try {
     const response = await axiosAuth.get(
-      `http://127.0.0.1:3000/users`)
+      `http://127.0.0.1:3000/664/users`)
     return response.data
 
   }

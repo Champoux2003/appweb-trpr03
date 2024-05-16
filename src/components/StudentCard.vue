@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 
 
@@ -26,11 +26,11 @@ function getColor(health: number) {
 </template>
 <style>
 .student-card {
-    border: 1px solid #4aa3a3;
-    border-radius: 4px;
-    padding: 20px;
-    margin: 10px;
-    width: 200px;
+  border: 1px solid #4aa3a3;
+  border-radius: 4px;
+  padding: 20px;
+  margin: 10px;
+  width: 200px;
 }
 
 .red{

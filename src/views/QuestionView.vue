@@ -12,18 +12,19 @@ interface Question {
 
 const questionStore = useQuestionStore()
 const questionsList = computed(() => questionStore.questions)//questions est un tableau de questions
-const userList = ref([])
+const userList = ref<any[]>([])
 
 onMounted(async () => {
-  try {
+ try {
     await questionStore.getQuestionsList()
     userList.value = await userService.getUsersList()
+    console.log(userList.value)
 
     if (questionStore.onError) {
-      confirm("Une erreur s'est produite lors de la récupération des questions.")
+      confirm("Une erreur s'est produite lors de la récupération des questions.")//remettre en confirm
     }
   } catch (error) {
-    confirm("Erreur critique lors de l'accès au store.")
+  confirm("Erreur critique lors de l'accès au store.")//remettre en confirm
   }
 })
 const imageClicked = ref(false) 
@@ -46,7 +47,7 @@ const selectOption = (option: string) => {
 }
 
 const getUser = (userId:string) => {
-const user = userList.value.find(user => question.userId === userId)
+const user = userList.value.find(user => user.id === parseInt(userId));
 return user ? user.name: 'Utilisateur inconnu';
 }
 
@@ -68,9 +69,9 @@ return user ? user.name: 'Utilisateur inconnu';
         <div class="card col-9">
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <div>{{ getUser(question.userId)}}</div>
+              <div>{{ getUser(question.userId) }}</div>
               <div>{{ question.priority }}</div>
-              <div>{{question.question}}</div>
+              <div>{{question.question }}</div>
               <button class="btn btn-primary" @click="respond()">Répondre</button>
               <button class="btn btn-danger">Supprimer</button>
             </li>

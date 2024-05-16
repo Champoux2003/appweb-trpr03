@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, computed, ref } from 'vue'
 import { useProfileStore } from '../stores/profileStore'
+import { userService } from '@/services/userService'
 import { RouterLink } from 'vue-router'
 
 const profileStore = useProfileStore()
