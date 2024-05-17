@@ -6,6 +6,7 @@ interface Question {
   userId: number,
   question: string,
   priority: number,
+  categoryId: number,
 }
 export const useQuestionStore = defineStore("questionStoreId", () => {
   const questions = ref([]);
@@ -50,7 +51,7 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
     try {
       onError.value = false;
       await questionService.deleteQuestion(questionId);
-      await getQuestionsList();
+     // await getQuestionsList();
     } catch (error) {
       onError.value = true;
     }

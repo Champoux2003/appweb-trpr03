@@ -21,8 +21,10 @@ onMounted(async () => {
   userName.value = user.value?.name
 })
 
-const deleteQuestion = (questionId: number) => {
-  questionStore.deleteQuestion(questionId)
+const deleteQuestion = () => {
+  questionStore.deleteQuestion(question.value?.id)
+  question.value = null
+  //questionStore.getQuestionsList()
 }
 </script>
 <template>
@@ -31,10 +33,11 @@ const deleteQuestion = (questionId: number) => {
       <p>Nom: {{ userName }}</p>
       <p>Question: {{ question.question }}</p>
       <p>Priorité: {{ question.priority }}</p>
+      <p>Catégorie: {{ question.category }}</p>
     </div>
 
     <button class="btn btn-primary" @click="">Répondre</button>
-    <button class="btn btn-danger" @click="deleteQuestion(question.id)">Supprimer</button>
+    <button class="btn btn-danger" @click="deleteQuestion()">Supprimer</button>
   </div>
   <!--<div class="col">
           <img class="img" src="../assets/man-raising-hand.png" @click="raiseHand()" :style="{ opacity: imageClicked ? '0.9': '1'}" v-if="!imageClicked"></img>

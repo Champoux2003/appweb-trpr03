@@ -22,7 +22,7 @@ const raiseHand = () => {
   }
 }*/
 
-const isTeacher = computed(() => profileStore.role === 'teacher') ?? false // remettre a false
+const isTeacher = computed(() => profileStore.role === 'teacher') ?? false
 
 const selectOption = (option: string) => {
   selectedOption.value = option
@@ -54,6 +54,10 @@ const selectOption = (option: string) => {
               <a class="dropdown-item" href="#" @click="selectOption('Priorité')">Priorité</a>
             </li>
           </ul>
+
+          <button id="category" class="btn btn-primary" @click="questionStore.getQuestionsList()">
+            Créer catégorie
+          </button>
         </div>
         <div>
           <div class="row" v-for="quest in questionsList">
@@ -74,5 +78,8 @@ img {
 }
 .btn-group {
   margin: 10px;
+}
+#category {
+  margin-left: 10px;
 }
 </style>

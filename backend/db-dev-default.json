@@ -30,18 +30,21 @@
       "userId": 2,
       "question": "J'ai inventé la machine à voyager dans le temps.",
       "priority": 1 ,
+      "categoryId": 1,
       "id": 1
     },
     {
       "userId": 3,
       "question": "J'ai utilisé la machine à voyager dans le temps.",
       "priority": 2,
+      "categoryId": 1,
       "id": 2
     },
     {
       "userId": 2,
       "question": "J'ai brisé la machine à voyager dans le temps.",
       "priority": 5,
+      "categoryId": 1,
       "id": 3
     }
 
@@ -52,6 +55,12 @@
       "teacherId": 1,
       "name": "App Web",
       "studentsId": [2, 3]
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Time Travel"
     }
   ]
 }
