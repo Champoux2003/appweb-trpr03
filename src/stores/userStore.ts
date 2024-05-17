@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { userService } from '../services/userService'
-import { useAuthStore } from './authStore'
 import { ref } from 'vue'
 
 export const useUserStore = defineStore('userStore', () => {
@@ -11,6 +10,7 @@ export const useUserStore = defineStore('userStore', () => {
     async function getUserById(id: number) {
         try {
             user.value = await userService.getUserById(id.toString())
+            
             return user
 
         } catch (error) {
@@ -24,11 +24,13 @@ export const useUserStore = defineStore('userStore', () => {
         } catch (error) {
         }
     }
+    
 
     return {
         getUsers,
         getUserById,
         users,
-        user
+        user,
+
     }
 })

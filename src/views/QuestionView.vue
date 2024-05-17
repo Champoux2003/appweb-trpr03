@@ -3,22 +3,14 @@ import { computed, ref, onMounted } from 'vue'
 import { useQuestionStore } from '@/stores/questionStore'
 import QuestionCard from '@/components/QuestionCard.vue'
 import CreateQuestion from '@/components/CreateQuestion.vue'
-import { useUserStore } from '@/stores/userStore'
+import { useProfileStore } from '@/stores/profileStore'
 
 const questionStore = useQuestionStore()
-const userStore = useUserStore()
+const profileStore = useProfileStore()
 const questionsList = computed(() => questionStore.questions) //questions est un tableau de questions
-const user = computed(() => userStore.user)
-onMounted(async () => {
-  try {
-    await questionStore.getQuestionsList()
 
-    if (questionStore.onError) {
-      confirm("Une erreur s'est produite lors de la récupération des questions.")
-    }
-  } catch (error) {
-    confirm("Erreur critique lors de l'accès au store.")
-  }
+onMounted(async () => {
+  await questionStore.getQuestionsList()
 })
 //const imageClicked = ref(false)
 
@@ -30,6 +22,8 @@ const raiseHand = () => {
   }
 }*/
 
+const isTeacher = computed(() => profileStore.role === 'teacher') ?? false // remettre a false
+
 const selectOption = (option: string) => {
   selectedOption.value = option
 }
@@ -38,29 +32,37 @@ const selectOption = (option: string) => {
   <div class="container">
     <div>
       <h1>Question</h1>
-      <div class="btn-group">
-        <button
-          type="button"
-          class="btn btn-primary dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          {{ selectedOption }}
-        </button>
-        <ul class="dropdown-menu">
-          <li>
-            <a class="dropdown-item" href="#" @click="selectOption('Plus récent')">Plus récent</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#" @click="selectOption('Plus ancien')">Plus ancien</a>
-          </li>
-          <li><a class="dropdown-item" href="#" @click="selectOption('Priorité')">Priorité</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="row" v-for="quest in questionsList">
-          <QuestionCard :id="quest.id" />
+      <div v-if="isTeacher">
+        <!-- remettre isTeacher-->
+        <div class="btn-group">
+          <button
+            type="button"
+            class="btn btn-primary dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ selectedOption }}
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="#" @click="selectOption('Plus récent')">Plus récent</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" @click="selectOption('Plus ancien')">Plus ancien</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#" @click="selectOption('Priorité')">Priorité</a>
+            </li>
+          </ul>
         </div>
+        <div>
+          <div class="row" v-for="quest in questionsList">
+            <QuestionCard :id="quest.id" />
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <CreateQuestion />
       </div>
     </div>
   </div>

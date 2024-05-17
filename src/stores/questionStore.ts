@@ -2,9 +2,15 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { questionService } from "../services/questionService";
 
+interface Question {
+  userId: number,
+  question: string,
+  priority: number,
+}
 export const useQuestionStore = defineStore("questionStoreId", () => {
   const questions = ref([]);
   const onError = ref(false);
+  const question = ref(null);
 /*
   function _initializeQuestions(questionsList : any) {
     questions.value = questionsList;
@@ -24,13 +30,14 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
   async function getQuestionById(questionId: number) {
     try {
       onError.value = false;
-      return await questionService.getQuestionById(questionId);
+      question.value = await questionService.getQuestionById(questionId)
+      return question;
     } catch (error) {
       onError.value = true;
     }
   }
 
-  async function createQuestion(question: any) {
+  async function createQuestion(question: Question) {
     try {
       onError.value = false;
       await questionService.createQuestion(question);
@@ -56,5 +63,6 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
     getQuestionById,
     createQuestion,
     deleteQuestion,
+    question,
   };
 });
