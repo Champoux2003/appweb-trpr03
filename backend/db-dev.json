@@ -23,6 +23,22 @@
       "id": 3,
       "role": "student",
       "health": 100
+    },
+    {
+      "email": "stud3@stud.com",
+      "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
+      "name": "LTN",
+      "id": 4,
+      "role": "student",
+      "health": 25
+    },
+    {
+      "email": "stud2@stud.com",
+      "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
+      "name": "Alexis",
+      "id": 5,
+      "role": "student",
+      "health": 80
     }
   ],
   "questions": [
@@ -51,7 +67,7 @@
       "id": 1,
       "teacherId": 1,
       "name": "App Web",
-      "studentsId": [2, 3]
+      "studentsId": [2, 3, 4, 5]
     }
   ]
 }
