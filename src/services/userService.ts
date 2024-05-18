@@ -12,7 +12,7 @@ interface User {
   health: number,
 }
 
-async function getUserById(userId: string) {
+async function getUserById(userId: number) {
   try {
     const authStore = useAuthStore()
     // axiosAuth est une instance d'axios configurée pour ajouter le JWT à une requête nécessitant une authentification.
@@ -27,7 +27,7 @@ async function getUserById(userId: string) {
   }
 }
 
-async function updateUserById(userId: string, newName:string) {
+async function updateUserById(userId: number, newName:string) {
   try {
     
     const user = await getUserById(userId) // Await the getUserById function call

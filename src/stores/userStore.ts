@@ -12,7 +12,7 @@ export const useUserStore = defineStore('userStore', () => {
 
     async function getUserById(id: number) {
         try {
-            user.value = await userService.getUserById(id.toString())
+            user.value = await userService.getUserById(id)
             return user
 
         } catch (error) {

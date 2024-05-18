@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import { defineProps } from 'vue'
 import { onMounted } from 'vue'
@@ -12,39 +12,38 @@ const colors = ['red', 'yellow', 'green', 'god']
 const props = defineProps({
     id: Number
 })
+const id = props.id
 
 const student = ref(null)
+let color = ref('') 
+
 onMounted(async () => {
-    await userStore.getUserById(props.id)
+    await userStore.getUserById(id)
     student.value = userStore.user
 })
 
-const getColor = computed(() => {
+const getColor =computed(() => {
     const health = student.value?.health
     if (health <= 30)
-        return colors[0]
+        return ref(colors[0])
     else if (health <= 60)
-        return colors[1]
+        return ref(colors[1])
     else if (health <= 90)
-        return colors[2]
+        return ref(colors[2])
     else
-        return colors[3]
+        return ref(colors[3])
 })
 
 
-watch(() => student.value?.health, () => {
-    getColor.value
-})
-
-
-const changeHealth = (healthChange: number) => {
-    console.log('changeHealth', healthChange)
-    userStore.healthChange(healthChange, student.value?.id)
+const changeHealth = async (healthChange: number) => {
+    await userStore.healthChange(healthChange, id)
+    await userStore.getUserById(id)
+    student.value = userStore.user
 }
 
 </script>
 <template>
-    <div class="student-card col-9" v-if="student" :class="getColor">
+    <div class="student-card col-9" v-if="student" :class="getColor.value">
         <h3>{{ student.name }}</h3>
         <button class="btn-green" @click="changeHealth(10)">+</button>
         <button class="btn-red" @click="changeHealth(-10)">-</button>

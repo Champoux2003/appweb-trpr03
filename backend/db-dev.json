@@ -19,10 +19,10 @@
     {
       "email": "stud2@stud.com",
       "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
-      "name": "asdasd",
+      "name": "Shampooing",
       "id": 3,
       "role": "student",
-      "health": 70
+      "health": 80
     },
     {
       "email": "stud3@stud.com",
