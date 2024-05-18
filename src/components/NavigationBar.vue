@@ -44,7 +44,7 @@ function logout() {
           :to="{ name: 'Register' }">
           Ajouter un étudiant
         </RouterLink>
-        <RouterLink v-if="isLoggedIn && isTeacher" class="nav-link" :class="{ active: $route.name == 'Classe' }"
+        <RouterLink v-if="isLoggedIn" class="nav-link" :class="{ active: $route.name == 'Classe' }"
           :to="{ name: 'Classe' }">
           Classe
         </RouterLink>

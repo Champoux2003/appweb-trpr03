@@ -40,9 +40,8 @@ async function addStudent(newStudentId: number) {
     const classe = await getClassById(1)
     const classStudents = classe.studentsId
     classStudents.push(newStudentId)
-    console.log(classStudents)
-    const response = await axiosAuth.put(
-      `http://127.0.0.1:3000/classes/${1}`, { id: classe.id, name: classe.name, studentsId: classStudents }
+    const response = await axiosAuth.patch(
+      `http://127.0.0.1:3000/classes/${1}`, {studentsId: classStudents }
     )
   } catch (error) {
   }

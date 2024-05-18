@@ -3,6 +3,7 @@ import { computed, ref, onMounted } from 'vue';
 import { useQuestionStore } from '@/stores/questionStore';
 import { userService } from '@/services/userService';
 import StudentCard from '@/components/StudentCard.vue';
+import TeacherCard from '@/components/TeacherCard.vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
 import { useClassStore } from '@/stores/classStore';
@@ -12,23 +13,36 @@ const router = useRouter()
 const authStore = useAuthStore()
 
 const classStore = useClassStore()
-const studentsId = ref([])
+const studentsId = ref(null)
+const classe = ref(null)
+const teacherId = ref(null)
 
-onMounted(async() => {
+onMounted(async () => {
     await classStore.getClassById(1)
-    studentsId.value = await classStore.classe.studentsId
+    classe.value = classStore.classe
+    teacherId.value = classe.value?.teacherId
+    studentsId.value = classe.value?.studentsId
 })
 
 
 </script>
 <template>
     <div class="classroom">
-        <h1>Classe</h1>
-       
-        <div v-for="studentId in studentsId" :key="studentId">
-            <StudentCard :id="studentId"/>
+        <h1>{{ classe?.name }}</h1>
+        <h2>Professeur</h2>
+        <div>
+            <TeacherCard v-if="teacherId != null" :id="teacherId" />
+        </div>
+        <h2>Élèves</h2>
+        <div class="students-grid">
+            <StudentCard v-if="teacherId != null" :id="studentId" v-for="studentId in studentsId" :key="studentId" />
         </div>
     </div>
 </template>
 <style>
+.students-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
 </style>

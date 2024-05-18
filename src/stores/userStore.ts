@@ -13,8 +13,8 @@ export const useUserStore = defineStore('userStore', () => {
     async function getUserById(id: number) {
         try {
             user.value = await userService.getUserById(id)
-            return user
 
+            return user.value
         } catch (error) {
         }
     }
@@ -46,12 +46,21 @@ export const useUserStore = defineStore('userStore', () => {
         }
     }
 
+    async function deleteUser(userId: number) {
+        try {
+            await userService.deleteUser(userId)
+            await getUsers() // refresh the list of users
+        } catch (error) {
+        }
+    }
+
     return {
         getUsers,
         getUserById,
         users,
         user,
         createUser,
-        healthChange
+        healthChange,
+        deleteUser
     }
 })

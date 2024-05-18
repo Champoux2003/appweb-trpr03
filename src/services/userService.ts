@@ -61,7 +61,7 @@ async function createUser(user : User) {
   }
 }
 
-async function deleteUser(userId: string) { 
+async function deleteUser(userId: number) { 
   try {
     await axiosAuth.delete(
       `${url}/${userId}`)
