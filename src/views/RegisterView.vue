@@ -5,8 +5,11 @@ import { required } from '@vee-validate/rules'
 import { useAuthStore } from '../stores/authStore'
 import { useRouter } from 'vue-router'
 import { useProfileStore } from '@/stores/profileStore'
-import { userService } from '@/services/userService'
+import { useUserStore } from '@/stores/userStore'
 import { define } from 'nock'
+
+
+
 
 interface User {
     email: string,
@@ -64,9 +67,9 @@ const register = async () => {
         role: role.value
     }
 
-    console.log(newUser)
-
-    await userService.createUser(newUser)
+    const userStore = useUserStore()
+    
+    await userStore.createUser(newUser)
 
     if (!authStore.authServiceError) {
         router.push({ name: 'Home' })

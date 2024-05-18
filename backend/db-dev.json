@@ -19,10 +19,10 @@
     {
       "email": "stud2@stud.com",
       "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
-      "name": "Shampooing",
+      "name": "asdasd",
       "id": 3,
       "role": "student",
-      "health": 100
+      "health": 70
     },
     {
       "email": "stud3@stud.com",
@@ -46,28 +46,32 @@
       "userId": 2,
       "question": "J'ai inventé la machine à voyager dans le temps.",
       "id": 1,
-      "priority": "1" 
+      "priority": "1"
     },
     {
       "userId": 2,
       "question": "J'ai utilisé la machine à voyager dans le temps.",
       "id": 2,
-      "priority": "2" 
+      "priority": "2"
     },
     {
       "userId": 2,
       "question": "J'ai brisé la machine à voyager dans le temps.",
       "id": 3,
-      "priority": "5" 
+      "priority": "5"
     }
-
   ],
   "classes": [
     {
       "id": 1,
       "teacherId": 1,
       "name": "App Web",
-      "studentsId": [2, 3, 4, 5]
+      "studentsId": [
+        2,
+        3,
+        4,
+        5
+      ]
     }
   ]
 }

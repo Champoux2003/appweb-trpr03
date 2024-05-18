@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import { defineProps } from 'vue'
 import { onMounted } from 'vue'
@@ -8,17 +8,6 @@ import { onMounted } from 'vue'
 const userStore = useUserStore()
 
 const colors = ['red', 'yellow', 'green', 'god']
-
-const getColor = (health: number) => {
-    if (health <= 30)
-        return colors[0]
-    else if (health <= 60)
-        return colors[1]
-    else if (health <= 90)
-        return colors[2]
-    else
-        return colors[3]
-}
 
 const props = defineProps({
     id: Number
@@ -30,12 +19,35 @@ onMounted(async () => {
     student.value = userStore.user
 })
 
+const getColor = computed(() => {
+    const health = student.value?.health
+    if (health <= 30)
+        return colors[0]
+    else if (health <= 60)
+        return colors[1]
+    else if (health <= 90)
+        return colors[2]
+    else
+        return colors[3]
+})
+
+
+watch(() => student.value?.health, () => {
+    getColor.value
+})
+
+
+const changeHealth = (healthChange: number) => {
+    console.log('changeHealth', healthChange)
+    userStore.healthChange(healthChange, student.value?.id)
+}
+
 </script>
 <template>
-    <div class="student-card col-9" v-if="student" :class="getColor(student.health)">
+    <div class="student-card col-9" v-if="student" :class="getColor">
         <h3>{{ student.name }}</h3>
-
-        <!-- ajouter bouton pour ajouter et retirer la vie -->
+        <button class="btn-green" @click="changeHealth(10)">+</button>
+        <button class="btn-red" @click="changeHealth(-10)">-</button>
     </div>
 </template>
 
@@ -43,11 +55,32 @@ onMounted(async () => {
 <style>
 .student-card {
     border: 1px solid #4aa3a3;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 20px;
     margin: 10px;
     width: 200px;
 }
+
+.btn-green {
+    background-color: lime;
+    color: black;
+    font-size: large;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px; 
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.btn-red {
+    background-color: rgb(255, 0, 0);
+    color: black;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px; 
+    padding: 10px;
+}
+
 
 .red {
   width: 20%;

@@ -89,3 +89,5 @@ GET http://127.0.0.1:3000/classes/1
 
 //get all classes
 GET http://127.0.0.1:3000/classes
+
+PUT http://127.0.0.1:3000/classes/1

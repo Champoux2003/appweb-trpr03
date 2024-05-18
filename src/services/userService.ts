@@ -2,7 +2,7 @@ import { parseAxiosError } from '../shared/parseAxiosError'
 import axiosAuth from '../shared/axiosAuth'
 import { useAuthStore } from '../stores/authStore'
 
-const url = `http://127.0.0.1:3000/users`
+const url = `http://127.0.0.1:3000/664/users`
 
 interface User {
   email: string,
@@ -18,8 +18,7 @@ async function getUserById(userId: string) {
     // axiosAuth est une instance d'axios configurée pour ajouter le JWT à une requête nécessitant une authentification.
     // voir le fichier src/shared/axiosAuth.js
     const response = await axiosAuth.get(
-      // TODO : utiliser une variable d'environnement pour l'url de l'api rest
-      `http://127.0.0.1:3000/users/${userId}`
+      `${url}/${userId}`
     )
 
     return response.data
@@ -32,9 +31,8 @@ async function updateUserById(userId: string, newName:string) {
   try {
     
     const user = await getUserById(userId) // Await the getUserById function call
-    const response = await axiosAuth.put(
-      // TODO : utiliser une variable d'environnement pour l'url de l'api rest
-      `http://127.0.0.1:3000/users/${userId}`, {email: user.email, password: user.password, name: newName, role: user.role} // Access the properties of the awaited user object
+    const response = await axiosAuth.patch(
+      `${url}/${userId}`, {name: newName} // Access the properties of the awaited user object
     )
     
     return response.data
@@ -46,7 +44,7 @@ async function updateUserById(userId: string, newName:string) {
 async function getUsersList() {
   try {
     const response = await axiosAuth.get(
-      `http://127.0.0.1:3000/664/users`)
+      `${url}`)
     return response.data
   }
   catch (error) {
@@ -56,7 +54,7 @@ async function getUsersList() {
 
 async function createUser(user : User) {
   try {
-    await axiosAuth.post(`http://127.0.0.1:3000/users`, {email: user.email, password: user.password, name: user.name, role: user.role, health: 50})
+    await axiosAuth.post(`${url}`, {email: user.email, password: user.password, name: user.name, role: user.role, health: 50})
   }
   catch (error) {
     throw parseAxiosError(error)
@@ -66,7 +64,7 @@ async function createUser(user : User) {
 async function deleteUser(userId: string) { 
   try {
     await axiosAuth.delete(
-      `http://127.0.0.1:3000/users/${userId}`)
+      `${url}/${userId}`)
       return true
   }
   catch (error) {
@@ -74,10 +72,25 @@ async function deleteUser(userId: string) {
   }
 }
 
+async function healthChange(healthChange: number, userId: string) {
+  try {
+    const user = await getUserById(userId)
+    const newHealth = user.health + healthChange
+    await axiosAuth.patch(
+      `${url}/${userId}`, {health: newHealth}
+    )
+  }
+  catch (error) {
+    throw parseAxiosError(error)
+  }
+}
+
+
 export const userService = {
   getUserById,
   getUsersList,
   updateUserById,
   createUser,
   deleteUser,
+  healthChange
 }
