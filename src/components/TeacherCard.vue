@@ -6,6 +6,7 @@ import { defineProps } from 'vue'
 import { onMounted } from 'vue'
 
 
+
 const userStore = useUserStore()
 const authStore = useAuthStore()
 
@@ -16,14 +17,13 @@ const props = defineProps({
 })
 const id = props.id
 
-const student = ref(null)
+const teacher = ref(null)
 const isTeacher = ref(false)
-
 let color = ref('') 
 
 onMounted(async () => {
     await userStore.getUserById(id)
-    student.value = userStore.user
+    teacher.value = userStore.user
     const userId = authStore.getUserId
     const loggedInUser = await userStore.getUserById(userId)
     if (loggedInUser.role !== 'teacher') {
@@ -31,10 +31,13 @@ onMounted(async () => {
     } else {
         isTeacher.value = true
     }
+
+
+
 })
 
 const getColor =computed(() => {
-    const health = student.value?.health
+    const health = teacher.value?.health
     if (health <= 30)
         return ref(colors[0])
     else if (health <= 60)
@@ -49,28 +52,21 @@ const getColor =computed(() => {
 const changeHealth = async (healthChange: number) => {
     await userStore.healthChange(healthChange, id)
     await userStore.getUserById(id)
-    student.value = userStore.user
+    teacher.value = userStore.user
 }
 
-const deleteStudent = async () => {
-    await userStore.deleteUser(id)
-    student.value = null
-}
 </script>
 <template>
-    <div class="student-card col-9" v-if="student" :class="getColor.value">
-        <h3>{{ student.name }}</h3>
-        <button class="btn-green" @click="changeHealth(10)" v-if="isTeacher">+</button>
-        <button class="btn-red" @click="changeHealth(-10)" v-if="isTeacher">-</button>
-        <button class="close-button" @click="deleteStudent()" v-if="isTeacher">X</button>
+    <div class="teacher-card col-9" v-if="teacher" :class="getColor.value">
+        <h3>{{ teacher.name }}</h3>
+        <button class="btn-green" @click="changeHealth(10)" v-if="!isTeacher">+</button>
+        <button class="btn-red" @click="changeHealth(-10)" v-if="!isTeacher">-</button>
     </div>
 </template>
 
 
 <style>
-
-
-.student-card {
+.teacher-card {
     position: relative;
     border: 2px solid #000000;
     border-radius: 10px;
@@ -122,23 +118,5 @@ const deleteStudent = async () => {
   width: 20%;
   padding: 10px;
   background-image: url(/src/assets/yellow.png);
-}
-
-.close-button {
-    position: absolute;
-    right: 0;
-    background-color: black;
-    color: white;
-    font-size: 1.5em;
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    transform: translate(-5%, -160%);
-    width: 40px;
-    height: 40px;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
 }
 </style>
