@@ -20,18 +20,20 @@ onMounted(async () => {
     confirm("Erreur critique lors de l'accès au store.")
   }
 })
-//const imageClicked = ref(false)
 
 const selectedOption = ref('Plus récent')
-/*
-const raiseHand = () => {
-  if (!imageClicked.value) {
-    imageClicked.value = true
-  }
-}*/
 
 const selectOption = (option: string) => {
   selectedOption.value = option
+  if (option === 'Plus récent') {
+    questionsList.value.sort((a, b) => a.id - b.id); // sort by id
+  }
+  else if (option === 'Plus ancien') {
+    questionsList.value.sort((a, b) => b.id - a.id); // sort by id descending
+  }
+  else if (option === 'Priorité') {
+    questionsList.value.sort((a, b) => a.priority - b.priority); // sort by priority
+  }
 }
 </script>
 <template>
@@ -39,12 +41,7 @@ const selectOption = (option: string) => {
     <div>
       <h1>Question</h1>
       <div class="btn-group">
-        <button
-          type="button"
-          class="btn btn-primary dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           {{ selectedOption }}
         </button>
         <ul class="dropdown-menu">
@@ -59,7 +56,7 @@ const selectOption = (option: string) => {
       </div>
       <div>
         <div class="row" v-for="quest in questionsList">
-          <QuestionCard :id="quest.id" />
+          <QuestionCard :id="quest.id" :key="`${quest.id}-${selectedOption}`"/>
         </div>
       </div>
     </div>
@@ -70,6 +67,7 @@ img {
   width: 40%;
   height: 100%;
 }
+
 .btn-group {
   margin: 10px;
 }

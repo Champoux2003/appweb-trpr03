@@ -43,12 +43,27 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
     try {
       onError.value = false;
       await questionService.deleteQuestion(questionId);
-      await getQuestionsList();
     } catch (error) {
       onError.value = true;
     }
   }
 
+  async function raiseHand(questionId: number) {
+    try {
+      onError.value = false;
+      await questionService.raiseHand(questionId);
+    } catch (error) {
+      onError.value = true;
+    }
+  }
+  async function lowerHand(questionId: number, priority: number) {
+    try {
+      onError.value = false;
+      await questionService.lowerHand(questionId, priority);
+    } catch (error) {
+      onError.value = true;
+    }
+  }
   return {
     questions,
     onError,
@@ -56,5 +71,7 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
     getQuestionById,
     createQuestion,
     deleteQuestion,
+    raiseHand,
+    lowerHand,
   };
 });
