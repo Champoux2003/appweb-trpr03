@@ -2,18 +2,18 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { authService } from '../services/authService'
 import jwtDecode from 'jwt-decode'
+import { userService } from '@/services/userService'
 
 interface DecodedToken {
   sub: string
   exp: number
 }
-
 export const useAuthStore = defineStore('authStoreId', () => {
   const token = ref('')
   const authServiceError = ref('')
 
   const isLoggedIn = computed(() => !!token.value)
-  
+
   const getUserId = computed(() => {
     if (!token.value) return ''
     const payload: DecodedToken = jwtDecode(token.value)
@@ -55,10 +55,10 @@ export const useAuthStore = defineStore('authStoreId', () => {
   }
 
   function refreshToken() {
-    logout()  // Simplified action for token refresh: logs out the user
+    logout() // Simplified action for token refresh: logs out the user
   }
 
-  return { 
+  return {
     token,
     authServiceError,
     isLoggedIn,
@@ -68,6 +68,6 @@ export const useAuthStore = defineStore('authStoreId', () => {
     logout,
     loadPersistedToken,
     login,
-    refreshToken
+    refreshToken,
   }
 })

@@ -27,7 +27,7 @@ onMounted(async () => {
 
 </script>
 <template>
-    <div class="classroom">
+    <div class="classroom" v-if="teacherId != null">
         <h1>{{ classe?.name }}</h1>
         <h2>Professeur</h2>
         <div>

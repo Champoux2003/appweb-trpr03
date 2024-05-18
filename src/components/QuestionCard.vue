@@ -5,42 +5,91 @@ import { useUserStore } from '@/stores/userStore'
 const questionStore = useQuestionStore()
 const userStore = useUserStore()
 const userName = ref('')
-const kwestion = ref<any>({})
-const props = defineProps<{
-  id: number
-}>()
+const props = defineProps({
+  id: Number
+})
+const id = props.id
+const question = ref(null)
+const priority = ref(0)
+const text = ref('')
+const isTeacher = ref(false)
+const user = ref(null)
 
 onMounted(async () => {
   try {
-    const question = await questionStore.getQuestionById(props.id)
-    kwestion.value = question
-    const user = await userStore.getUserById(question.userId)
-    userName.value = user.name
-    if (questionStore.onError) {
-      confirm("Une erreur s'est produite lors de la récupération des questions.")
-    }
+    question.value = await questionStore.getQuestionById(id)
+    await userStore.getUserById(question.value.userId)
+    user.value = userStore.user
+    userName.value = user.value?.name
+    priority.value = question.value.priority
+    text.value = question.value.question
   } catch (error) {
-    confirm("Erreur critique lors de l'accès au store.")
   }
 })
 
-const deleteQuestion = (questionId: number) => {
-  questionStore.deleteQuestion(questionId)
+const deleteQuestion = () => {
+  questionStore.deleteQuestion(id)
+  question.value = null
 }
+
+const handRaised = ref(1)
+
+const raiseHand = async() => { // allows to raise and lower hand raising the hand makes the question priority 1
+  if (handRaised.value === 1) {
+    questionStore.raiseHand(id)
+  } else {
+    questionStore.lowerHand(id, priority.value)
+  }
+  handRaised.value = handRaised.value === 1 ? 0.5 : 1
+  question.value = await questionStore.getQuestionById(id)
+  
+}
+
 </script>
 <template>
   <div>
-    <div class="card">
+    <div class="card" v-if="question">
       <p>Nom: {{ userName }}</p>
-      <p>Question: {{ kwestion.question }}</p>
-      <p>Priorité: {{ kwestion.priority }}</p>
+      <p>Question: {{ text }}</p>
+      
+      <!-- temporaire -->
+      <p>Priorité: {{ question.priority }}</p>
+      <img src="/src/assets/man-raising-hand.png" alt="Lever la main" class="raise-hand-img" @click="raiseHand" :style="{ opacity: handRaised}">
+
+      <div class="button-group">
+        <button class="btn btn-primary" @click="">Répondre</button>
+        <button class="btn btn-danger" @click="deleteQuestion()">Supprimer</button>
+      </div>
     </div>
   </div>
-  <button class="btn btn-primary" @click="">Répondre</button>
-  <button class="btn btn-danger" @click="deleteQuestion(kwestion.id)">Supprimer</button>
-
-  <!--<div class="col">
-          <img class="img" src="../assets/man-raising-hand.png" @click="raiseHand()" :style="{ opacity: imageClicked ? '0.9': '1'}" v-if="!imageClicked"></img>
-          <p v-else><img class="img" src="../assets/man-raising-hand.png" :style="{ opacity: imageClicked ? '0.5': '1'}"></img></p>
-        </div>-->
 </template>
+<style scoped>
+.card {
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  margin-top: 20px;
+}
+
+.button-group .btn {
+  width: 80px;
+  padding: 5px;
+  font-size: 0.8em;
+  margin: 0 10px;
+  margin-bottom: 10px;
+}
+
+.raise-hand-img {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  right: 0;
+  transform: translate(0%, 50%);
+}
+</style>

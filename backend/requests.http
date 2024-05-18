@@ -40,11 +40,12 @@ Content-type: application/json
 
 DELETE http://127.0.0.1:3000/questions/1
 
-
 {
   "userId": 1,
   "comment": "Un commentaire de l'utilisateur 1"
 }
+
+PUT http://127.0.0.1:3000/questions/1
 
 ### Modifier une ressource privée d'un uti
 ### Se déconnecter 
