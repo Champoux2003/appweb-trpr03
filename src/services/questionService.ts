@@ -2,6 +2,7 @@ import { parseAxiosError } from '../shared/parseAxiosError'
 import axiosAuth from '../shared/axiosAuth'
 
 const url = 'http://127.0.0.1:3000/666/questions'
+const urlCategory = 'http://127.0.0.1:3000/666/categories'
 
 interface Question {
   userId: number,
@@ -67,6 +68,15 @@ async function lowerHand(questionId: number, priority: number) {
   }
 }
 
+async function addCategory(category: string) {
+  try {
+    await axiosAuth.post(
+      `${urlCategory}`, {category: category})
+  }catch (error) {
+    throw parseAxiosError(error)
+  }
+}
+
 export const questionService = {
   getAllQuestions,
   getQuestionById,
@@ -74,4 +84,5 @@ export const questionService = {
   deleteQuestion,
   raiseHand,
   lowerHand,
+  addCategory,
 }
