@@ -3,83 +3,106 @@ import { computed, ref, onMounted } from 'vue'
 import { useQuestionStore } from '@/stores/questionStore'
 import QuestionCard from '@/components/QuestionCard.vue'
 import CreateQuestion from '@/components/CreateQuestion.vue'
-import { useProfileStore } from '@/stores/profileStore'
+import { useUserStore } from '@/stores/userStore'
+import { useAuthStore } from '@/stores/authStore'
 
 const questionStore = useQuestionStore()
-const profileStore = useProfileStore()
+const userStore = useUserStore()
+const authStore = useAuthStore()
 const questionsList = computed(() => questionStore.questions) //questions est un tableau de questions
+const user = computed(() => userStore.user)
 
+const loggedInUser = ref(null)
+const isTeacher = ref(false)
+
+let category = ref('')
 onMounted(async () => {
-  await questionStore.getQuestionsList()
+  try {
+    await questionStore.getQuestionsList()
+    await userStore.getUserById(parseInt(authStore.getUserId))
+    loggedInUser.value = userStore.user
+
+    if (loggedInUser.value.role === 'teacher') {
+      isTeacher.value = true
+    }
+    
+    if (questionStore.onError) {
+      confirm("Une erreur s'est produite lors de la récupération des questions.")
+    }
+  } catch (error) {
+    confirm("Erreur critique lors de l'accès au store.")
+  }
 })
-//const imageClicked = ref(false)
 
 const selectedOption = ref('Plus récent')
-/*
-const raiseHand = () => {
-  if (!imageClicked.value) {
-    imageClicked.value = true
-  }
-}*/
-
-const isTeacher = computed(() => profileStore.role === 'teacher') ?? false
 
 const selectOption = (option: string) => {
   selectedOption.value = option
+  if (option === 'Plus récent') {
+    questionsList.value.sort((a, b) => a.id - b.id); // sort by id
+  }
+  else if (option === 'Plus ancien') {
+    questionsList.value.sort((a, b) => b.id - a.id); // sort by id descending
+  }
+  else if (option === 'Priorité') {
+    questionsList.value.sort((a, b) => a.priority - b.priority); // sort by priority
+  }
+}
+
+const addCategory = () => {
+  console.log(category.value)
+  questionStore.addCategory(category.value)
 }
 </script>
 <template>
   <div class="container">
     <div>
       <h1>Question</h1>
-      <div v-if="isTeacher">
-        <!-- remettre isTeacher-->
-        <div class="btn-group">
-          <button
-            type="button"
-            class="btn btn-primary dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            {{ selectedOption }}
-          </button>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" href="#" @click="selectOption('Plus récent')">Plus récent</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" @click="selectOption('Plus ancien')">Plus ancien</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" @click="selectOption('Priorité')">Priorité</a>
-            </li>
-          </ul>
-
-          <button id="category" class="btn btn-primary" @click="questionStore.getQuestionsList()">
-            Créer catégorie
-          </button>
-        </div>
-        <div>
-          <div class="row" v-for="quest in questionsList">
-            <QuestionCard :id="quest.id" />
-          </div>
-        </div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ selectedOption }}
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="#" @click="selectOption('Plus récent')">Plus récent</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#" @click="selectOption('Plus ancien')">Plus ancien</a>
+          </li>
+          <li><a class="dropdown-item" href="#" @click="selectOption('Priorité')">Priorité</a></li>
+        </ul>
       </div>
-      <div v-else>
-        <CreateQuestion />
+      <div>
+        <div class="input-group" v-if="isTeacher">
+          <input type="text" class="form-control form-control-sm" placeholder="Ajouter une catégorie" v-model="category"/>
+          <button type="button" class="btn btn-primary btn-sm" @click="addCategory()">Ajouter</button>
+        </div>
+
+      </div>
+
+      <div>
+        <div class="row" v-for="quest in questionsList">
+          <QuestionCard :id="quest.id" :key="`${quest.id}-${selectedOption}`" />
+        </div>
       </div>
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 img {
   width: 40%;
   height: 100%;
 }
+
 .btn-group {
   margin: 10px;
 }
-#category {
-  margin-left: 10px;
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;  /* Adjust as needed */
 }
+
+
 </style>

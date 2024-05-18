@@ -33,25 +33,19 @@ Authorization: Bearer REMPLACER_PAR_JETON_NON_EXPIRÉ_UTILISATEUR_1
 
 GET http://127.0.0.1:3000/questions/1
 Authorization: Bearer REMPLACER_PAR_JETON_NON_EXPIRÉ_UTILISATEUR_1 
-
-GET http://127.0.0.1:3000/questions
-Authorization: Bearer REMPLACER_PAR_JETON_NON_EXPIRÉ_UTILISATEUR_1 
 ### Ajouter une ressource privée à un utilisateur
 POST http://127.0.0.1:3000/questions
 Authorization: Bearer REMPLACER_PAR_JETON_NON_EXPIRÉ_UTILISATEUR_1
 Content-type: application/json
-  
-  {
-    "userId": 1,
-    "question": "Quelle est la capitale de la France?",
-    "priority": 2,
-    "id": 1,
-  }
 
 DELETE http://127.0.0.1:3000/questions/1
 
+{
+  "userId": 1,
+  "comment": "Un commentaire de l'utilisateur 1"
+}
 
-
+PUT http://127.0.0.1:3000/questions/1
 
 ### Modifier une ressource privée d'un uti
 ### Se déconnecter 
@@ -96,3 +90,5 @@ GET http://127.0.0.1:3000/classes/1
 
 //get all classes
 GET http://127.0.0.1:3000/classes
+
+PUT http://127.0.0.1:3000/classes/1

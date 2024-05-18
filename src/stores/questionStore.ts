@@ -2,16 +2,9 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { questionService } from "../services/questionService";
 
-interface Question {
-  userId: number,
-  question: string,
-  priority: number,
-  categoryId: number,
-}
 export const useQuestionStore = defineStore("questionStoreId", () => {
   const questions = ref([]);
   const onError = ref(false);
-  const question = ref(null);
 /*
   function _initializeQuestions(questionsList : any) {
     questions.value = questionsList;
@@ -31,14 +24,13 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
   async function getQuestionById(questionId: number) {
     try {
       onError.value = false;
-      question.value = await questionService.getQuestionById(questionId)
-      return question;
+      return await questionService.getQuestionById(questionId);
     } catch (error) {
       onError.value = true;
     }
   }
 
-  async function createQuestion(question: Question) {
+  async function createQuestion(question: any) {
     try {
       onError.value = false;
       await questionService.createQuestion(question);
@@ -51,7 +43,32 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
     try {
       onError.value = false;
       await questionService.deleteQuestion(questionId);
-     // await getQuestionsList();
+    } catch (error) {
+      onError.value = true;
+    }
+  }
+
+  async function raiseHand(questionId: number) {
+    try {
+      onError.value = false;
+      await questionService.raiseHand(questionId);
+    } catch (error) {
+      onError.value = true;
+    }
+  }
+  async function lowerHand(questionId: number, priority: number) {
+    try {
+      onError.value = false;
+      await questionService.lowerHand(questionId, priority);
+    } catch (error) {
+      onError.value = true;
+    }
+  }
+
+  async function addCategory(category: string) {
+    try {
+      onError.value = false;
+      await questionService.addCategory(category);
     } catch (error) {
       onError.value = true;
     }
@@ -64,6 +81,8 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
     getQuestionById,
     createQuestion,
     deleteQuestion,
-    question,
+    raiseHand,
+    lowerHand,
+    addCategory,
   };
 });

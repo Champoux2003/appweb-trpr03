@@ -1,56 +1,88 @@
 import { parseAxiosError } from '../shared/parseAxiosError'
 import axiosAuth from '../shared/axiosAuth'
 
+const url = 'http://127.0.0.1:3000/666/questions'
+const urlCategory = 'http://127.0.0.1:3000/666/categories'
+
 interface Question {
   userId: number,
   question: string,
   priority: number,
-  categoryId: number,
 }
-async function getAllQuestions () {
+async function getAllQuestions() {
   try {
     const response = await axiosAuth.get(
-      // TODO : utiliser une variable d'environnement pour l'url de l'api rest
-      `http://127.0.0.1:3000/questions`)
-      return response.data
-    } catch (error) {
-      throw parseAxiosError(error)
-    }
+      `${url}`)
+    return response.data
+  } catch (error) {
+    throw parseAxiosError(error)
+  }
 }
 
-async function getQuestionById (questionId: number) {
+async function getQuestionById(questionId: number) {
   try {
     const response = await axiosAuth.get(
-      // TODO : utiliser une variable d'environnement pour l'url de l'api rest
-      `http://127.0.0.1:3000/questions/${questionId}`)
-        return response.data
-    }catch(error){
-      throw parseAxiosError(error)
-    }
+      `${url}/${questionId}`)
+    return response.data
+  } catch (error) {
+    throw parseAxiosError(error)
+  }
 }
 
-async function createQuestion (question: Question) { 
+async function createQuestion(question: Question) {
   try {
     const response = await axiosAuth.post(
-      `http://127.0.0.1:3000/questions`, {userId: question.userId, question: question.question, priority: parseInt(question.priority), categoryId: question.categoryId})
-      return response.data
-    }catch(error){
-      throw parseAxiosError(error)
-    }
+      `${url}`, { userid: question.userId, question: question.question, priority: question.priority })
+    return response.data
+  } catch (error) {
+    throw parseAxiosError(error)
+  }
 }
 
-async function deleteQuestion(questionId: number){
-  try{
+async function deleteQuestion(questionId: number) {
+  try {
     await axiosAuth.delete(
-      `http://127.0.0.1:3000/questions/${questionId}`)
-      return true
-  }catch(error){
+      `${url}/${questionId}`)
+    return true
+  } catch (error) {
     throw parseAxiosError(error)
+  }
 }
+
+async function raiseHand(questionId: number) {
+  try {
+    await axiosAuth.patch(
+      `${url}/${questionId}`, {priority: 1})
+  }catch (error) {
+    throw parseAxiosError(error)
+  }
 }
+
+async function lowerHand(questionId: number, priority: number) {
+  try {
+    const question = await getQuestionById(questionId)
+    await axiosAuth.patch(
+      `${url}/${questionId}`, {priority: priority})
+  }catch (error) {
+    throw parseAxiosError(error)
+  }
+}
+
+async function addCategory(category: string) {
+  try {
+    await axiosAuth.post(
+      `${urlCategory}`, {category: category})
+  }catch (error) {
+    throw parseAxiosError(error)
+  }
+}
+
 export const questionService = {
-    getAllQuestions,
-    getQuestionById,
-    createQuestion,
-    deleteQuestion,
-    }
+  getAllQuestions,
+  getQuestionById,
+  createQuestion,
+  deleteQuestion,
+  raiseHand,
+  lowerHand,
+  addCategory,
+}

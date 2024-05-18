@@ -23,44 +23,73 @@
       "id": 3,
       "role": "student",
       "health": 100
+    },
+    {
+      "email": "stud3@stud.com",
+      "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
+      "name": "LTN",
+      "id": 4,
+      "role": "student",
+      "health": 25
+    },
+    {
+      "email": "stud2@stud.com",
+      "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
+      "name": "Alexis",
+      "id": 5,
+      "role": "student",
+      "health": 80
     }
   ],
   "questions": [
     {
       "userId": 2,
       "question": "J'ai inventé la machine à voyager dans le temps.",
-      "priority": 1 ,
-      "categoryId": 1,
-      "id": 1
+      "id": 1,
+      "priority": 1
     },
     {
-      "userId": 3,
+      "userId": 2,
       "question": "J'ai utilisé la machine à voyager dans le temps.",
-      "priority": 2,
-      "categoryId": 1,
-      "id": 2
+      "id": 2,
+      "priority": 2
     },
     {
       "userId": 2,
       "question": "J'ai brisé la machine à voyager dans le temps.",
-      "priority": 5,
-      "categoryId": 1,
-      "id": 3
+      "id": 3,
+      "priority": 5
     }
-
   ],
   "classes": [
     {
       "id": 1,
       "teacherId": 1,
       "name": "App Web",
-      "studentsId": [2, 3]
+      "studentsId": [
+        2,
+        3,
+        4,
+        5
+      ]
     }
   ],
   "categories": [
     {
       "id": 1,
-      "name": "Time Travel"
+      "name": "Bogue"
+    },
+    {
+      "id": 2,
+      "name": "Aide"
+    },
+    {
+      "category": "",
+      "id": 3
+    },
+    {
+      "category": "Examens",
+      "id": 4
     }
   ]
 }

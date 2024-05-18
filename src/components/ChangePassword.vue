@@ -1,4 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref, onMounted, computed } from 'vue'
+import { Field, Form, ErrorMessage, defineRule, validate } from 'vee-validate'
+import { required } from '@vee-validate/rules'
+import { useAuthStore } from '../stores/authStore'
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/userStore'
+
+
+</script>
 <template>
   <h1>Changer le mot de passe</h1>
   <form>
