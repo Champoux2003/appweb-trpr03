@@ -2,11 +2,13 @@
 import { ref, computed, watchEffect } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import { useAuthStore } from '@/stores/authStore'
+import { useClassStore } from '@/stores/classStore'
 import { defineProps } from 'vue'
 import { onMounted } from 'vue'
 
 const userStore = useUserStore()
 const authStore = useAuthStore()
+const classStore = useClassStore()
 
 const colors = ['red', 'yellow', 'green', 'god']
 
@@ -48,6 +50,7 @@ const changeHealth = async (healthChange: number) => {
 
 const deleteStudent = async () => {
   await userStore.deleteUser(id)
+  await classStore.deleteStudentFromClass(id)
   student.value = null
 }
 </script>
