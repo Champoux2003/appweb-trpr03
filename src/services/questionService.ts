@@ -77,6 +77,17 @@ async function addCategory(category: string) {
   }
 }
 
+async function getCategories() {
+  try {
+    const response = await axiosAuth.get(
+      `${urlCategory}`)
+    return response.data
+  } catch (error) {
+    throw parseAxiosError(error)
+  }
+
+}
+
 export const questionService = {
   getAllQuestions,
   getQuestionById,
@@ -85,4 +96,5 @@ export const questionService = {
   raiseHand,
   lowerHand,
   addCategory,
+  getCategories,
 }
