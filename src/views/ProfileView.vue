@@ -37,7 +37,7 @@ const cancelEdit = () => {
 </script>
 
 <template>
-  <div>
+  <div class="content">
     <h1>Profile</h1>
     <div>
       <p v-if="!editingName">
@@ -52,15 +52,21 @@ const cancelEdit = () => {
     </div>
     <div>Courriel: {{ email }}</div>
     <div>Rôle: {{ role }}</div>
-    <button class="btn btn-secondary" name="passwordChange">
-      <RouterLink
-        :class="{ active: $route.name == 'ChangeCredentials' }"
-        :to="{ name: 'ChangeCredentials', params: { form: 'password' } }"
-      >
+    <RouterLink :class="{ active: $route.name == 'ChangeCredentials' }"
+      :to="{ name: 'ChangeCredentials', params: { form: 'password' } }">
+      <button class="btn btn-secondary" name="passwordChange">
         Changer le mot de passe
-      </RouterLink>
-    </button>
+      </button>
+    </RouterLink>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.btn {
+  margin: 0.5rem;
+  background-color: rgb(0, 92, 212);
+}
+.content {
+  margin: 10px;
+}
+</style>

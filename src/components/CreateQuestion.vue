@@ -4,6 +4,7 @@ import { Field, Form, ErrorMessage, defineRule, validate } from 'vee-validate'
 import { useQuestionStore } from '@/stores/questionStore'
 import { useUserStore } from '@/stores/userStore'
 import { useAuthStore } from '@/stores/authStore'
+import { required } from '@vee-validate/rules'
 
 
 const questionStore = useQuestionStore()
@@ -12,6 +13,7 @@ const authStore = useAuthStore()
 
 defineRule('isRequired', required)
 const isRequired = 'isRequired'
+
 
 
 const categories = ref([])

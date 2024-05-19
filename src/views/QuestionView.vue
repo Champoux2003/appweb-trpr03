@@ -13,7 +13,7 @@ const questionsList = computed(() => questionStore.questions) //questions est un
 const user = computed(() => userStore.user)
 
 const loggedInUser = ref(null)
-const isTeacher = ref(false)
+const isTeacher = ref(null)
 
 let category = ref('')
 onMounted(async () => {
@@ -23,7 +23,10 @@ onMounted(async () => {
     loggedInUser.value = userStore.user
 
     if (loggedInUser.value?.role === 'teacher') {
-      isTeacher.value = true
+      isTeacher.value = true as any
+    }
+    else {
+      isTeacher.value = false as any
     }
 
     if (questionStore.onError) {
@@ -58,7 +61,7 @@ const updateQuestions = async() => {
 }
 </script>
 <template>
-  <div class="container">
+  <div class="container" v-if="isTeacher != null">
     <div>
       <h1>Question</h1>
       <div class="btn-group">

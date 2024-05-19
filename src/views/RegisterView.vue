@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { Field, Form, ErrorMessage, defineRule, validate } from 'vee-validate'
-import { required } from '@vee-validate/rules'
+import { is, required } from '@vee-validate/rules'
 import { useAuthStore } from '../stores/authStore'
 import { useRouter } from 'vue-router'
 import { useProfileStore } from '@/stores/profileStore'
 import { useUserStore } from '@/stores/userStore'
-import { define } from 'nock'
 
 
 
@@ -48,9 +47,17 @@ const role = ref('student') //can only register a student. Teacher are created b
 
 const authServiceError = computed(() => authStore.authServiceError)
 
+const isTeacher = computed(() => {
+    const profileStore = useProfileStore()
+    return profileStore.role === 'teacher'
+})
 
 onMounted(() => {
     authStore.clearError()
+
+    if(!isTeacher.value) {
+        router.push({ name: 'NotFound' })
+    }
 })
 
 const register = async () => {
@@ -74,6 +81,8 @@ const register = async () => {
     if (!authStore.authServiceError) {
         router.push({ name: 'Home' })
     }
+
+
 }
 </script>
 <template>
