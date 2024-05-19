@@ -22,7 +22,7 @@
       "name": "Shampooing",
       "id": 3,
       "role": "student",
-      "health": 60
+      "health": 100
     },
     {
       "email": "stud3@stud.com",
@@ -61,20 +61,16 @@
       "question": "J'ai brisé la machine à voyager dans le temps.",
       "id": 3,
       "priority": 5,
-      "category": "Bogue"
+      "category": "Bogue" 
     }
+
   ],
   "classes": [
     {
       "id": 1,
       "teacherId": 1,
       "name": "App Web",
-      "studentsId": [
-        2,
-        3,
-        4,
-        5
-      ]
+      "studentsId": [2, 3, 4, 5]
     }
   ],
   "categories": [

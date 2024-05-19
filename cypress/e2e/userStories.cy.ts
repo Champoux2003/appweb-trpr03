@@ -132,6 +132,16 @@ describe('Récits utilisateur', () => {
     })
   })
 
+  it('je peux supprimer une question que j\'ai créé', () => {
+    createQuestion()
+
+    cy.get('button[name=deleteQuestion]').click()
+
+    cy.contains(/Question: Est-ce que je suis un bon élève?/).should('not.exist')
+    cy.contains(/Catégorie: Test/).should('not.exist')
+    cy.contains(/Nom: Chuck Norris/).should('not.exist')
+  })
+
   it('je peux retirer de la vie au professeur', () =>{
     cy.login(student.email, student.password)
     cy.visit('/classe')

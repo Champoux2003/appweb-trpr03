@@ -156,4 +156,11 @@ describe('Récits enseignant', () => {
     cy.contains(/question/i)
   })
 
+  it('je peux repondre à une question', () => {
+    cy.login(teacher.email, teacher.password)
+
+    cy.visit('/question')
+    cy.get('button[name=repondre]').click()
+    cy.contains(/question/i)
+  })
 })

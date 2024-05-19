@@ -53,7 +53,7 @@ async function deleteQuestion(questionId: number) {
 async function raiseHand(questionId: number) {
   try {
     await axiosAuth.patch(
-      `${url}/${questionId}`, {priority: 1})
+      `${url}/${questionId}`, {priority: 0})
   }catch (error) {
     throw parseAxiosError(error)
   }
@@ -67,6 +67,16 @@ async function lowerHand(questionId: number, priority: number) {
   }catch (error) {
     throw parseAxiosError(error)
   }
+}
+
+async function repondre(questionId: number) {
+  try {
+    await axiosAuth.patch(
+      `${url}/${questionId}`, {priority: -1})
+  }catch (error) {
+    throw parseAxiosError(error)
+  }
+
 }
 
 async function addCategory(category: string) {
@@ -98,4 +108,5 @@ export const questionService = {
   lowerHand,
   addCategory,
   getCategories,
+  repondre,
 }
