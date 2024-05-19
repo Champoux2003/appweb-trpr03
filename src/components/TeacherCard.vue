@@ -13,27 +13,18 @@ const authStore = useAuthStore()
 const colors = ['red', 'yellow', 'green', 'god']
 
 const props = defineProps({
-    id: Number
+    id: Number,
+    isTeacher: Boolean
 })
 const id = props.id
+const isTeacher = props.isTeacher
 
 const teacher = ref(null)
-const isTeacher = ref(false)
 let color = ref('') 
 
 onMounted(async () => {
     await userStore.getUserById(id)
     teacher.value = userStore.user
-    const userId = authStore.getUserId
-    const loggedInUser = await userStore.getUserById(userId)
-    if (loggedInUser.role !== 'teacher') {
-        isTeacher.value = false
-    } else {
-        isTeacher.value = true
-    }
-
-
-
 })
 
 const getColor =computed(() => {

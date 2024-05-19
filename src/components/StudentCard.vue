@@ -2,34 +2,31 @@
 import { ref, computed, watchEffect } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import { useAuthStore } from '@/stores/authStore'
+import { useClassStore } from '@/stores/classStore'
 import { defineProps } from 'vue'
 import { onMounted } from 'vue'
 
 const userStore = useUserStore()
-const authStore = useAuthStore()
+const classStore = useClassStore()
 
 const colors = ['red', 'yellow', 'green', 'god']
 
 const props = defineProps({
-  id: Number
+  id: Number,
+  isTeacher: Boolean
 })
+
 const id = props.id
+const isTeacher = props.isTeacher
 
 const student = ref(null)
-const isTeacher = ref(false)
+
 
 let color = ref('')
 
 onMounted(async () => {
   await userStore.getUserById(id)
   student.value = userStore.user
-  const userId = authStore.getUserId
-  const loggedInUser = await userStore.getUserById(userId)
-  if (loggedInUser.role !== 'teacher') {
-    isTeacher.value = false
-  } else {
-    isTeacher.value = true
-  }
 })
 
 const getColor = computed(() => {
@@ -48,6 +45,7 @@ const changeHealth = async (healthChange: number) => {
 
 const deleteStudent = async () => {
   await userStore.deleteUser(id)
+  await classStore.deleteStudentFromClass(id)
   student.value = null
 }
 </script>
