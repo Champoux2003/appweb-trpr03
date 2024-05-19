@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { Field, Form, ErrorMessage, defineRule, validate } from 'vee-validate'
-import { is, required } from '@vee-validate/rules'
+import { required } from '@vee-validate/rules'
 import { useAuthStore } from '../stores/authStore'
 import { useRouter } from 'vue-router'
 import { useProfileStore } from '@/stores/profileStore'
@@ -39,6 +39,9 @@ const isEmail = (value : any) => (!value.includes('@') || !value.includes('.') ?
 
 const router = useRouter()
 const authStore = useAuthStore()
+const userStore = useUserStore()
+const loggedInUser = ref(null)
+
 const name = ref('')
 const email = ref('')
 const password = ref('')
@@ -47,13 +50,19 @@ const role = ref('student') //can only register a student. Teacher are created b
 
 const authServiceError = computed(() => authStore.authServiceError)
 
-const isTeacher = computed(() => {
-    const profileStore = useProfileStore()
-    return profileStore.role === 'teacher'
-})
+const isTeacher = ref(null)
 
-onMounted(() => {
+onMounted(async() => {
     authStore.clearError()
+
+    await userStore.getUserById(parseInt(authStore.getUserId))
+    loggedInUser.value = userStore.user
+    if (loggedInUser.value?.role === 'teacher') {
+      isTeacher.value = true as any
+    }
+    else {
+      isTeacher.value = false as any
+    }
 
     if(!isTeacher.value) {
         router.push({ name: 'NotFound' })
@@ -99,7 +108,7 @@ const register = async () => {
                         <!-- le message d'erreur provient de la règle isRequired déclarée en haut -->
                         <Field class="form-control" id="name-input" name="name-input" type="name" :rules="isRequired"
                             v-model="name" />
-                        <ErrorMessage class="text-danger" name="name-input" />
+                        <ErrorMessage class="text-danger" name="name-input-error" />
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="email-input">Email</label>

@@ -17,6 +17,9 @@
     }
   ],
   "categories": [
-
+    {
+      "id": 1,
+      "name": "Test"
+    }
   ]
 }

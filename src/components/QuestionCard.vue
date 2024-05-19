@@ -60,10 +60,10 @@ const raiseHand = async () => {
       <p>Nom: {{ userName }}</p>
       <p>Question: {{ text }}</p>
       <p>Catégorie: {{ category }}</p>
-      <img v-if="!isTeacher" src="/src/assets/man-raising-hand.png" alt="Lever la main" class="raise-hand-img" @click="raiseHand" :style="{ opacity: handRaised}">
+      <img v-if="question.userId == parseInt(authStore.getUserId)" src="/src/assets/man-raising-hand.png" alt="Lever la main" class="raise-hand-img" @click="raiseHand" :style="{ opacity: handRaised}" name="hand">
       <div class="button-group">
-        <button class="btn btn-primary" @click="">Répondre</button>
-        <button class="btn btn-danger" name="deleteQuestion" @click="deleteQuestion()">
+        <button class="btn btn-primary" @click="" v-if="isTeacher">Répondre</button>
+        <button class="btn btn-danger" name="deleteQuestion" @click="deleteQuestion()" v-if="isTeacher || question.userId == parseInt(authStore.getUserId)">
           Supprimer
         </button>
       </div>
