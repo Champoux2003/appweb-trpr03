@@ -39,6 +39,11 @@
       "id": 5,
       "role": "student",
       "health": 80
+    },
+    {
+      "email": "mon@courriel.com",
+      "password": "$2a$10$IQmLRv30x2WSwZbdlgL0ke97fKKRevrdUTO.CR2uSk9p6h280TLJq",
+      "id": 6
     }
   ],
   "questions": [
@@ -82,14 +87,6 @@
     {
       "id": 2,
       "name": "Aide"
-    },
-    {
-      "category": "",
-      "id": 3
-    },
-    {
-      "category": "Examens",
-      "id": 4
     }
   ]
 }
