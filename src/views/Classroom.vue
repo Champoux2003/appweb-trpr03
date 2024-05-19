@@ -8,7 +8,7 @@ import { useAuthStore } from '@/stores/authStore';
 import { useClassStore } from '@/stores/classStore';
 
 // Fetch the students data here
-const router = useRouter()
+//const router = useRouter()
 const authStore = useAuthStore()
 const userStore = useUserStore()
 

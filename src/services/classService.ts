@@ -14,7 +14,7 @@ interface User {
 
 async function getClassById(classId: number) {
   try {
-    const response = await axiosAuth.get(`http://127.0.0.1:3000/classes/${classId}`)
+    const response = await axiosAuth.get(`${url}/${classId}`)
     return response.data
   } catch (error) {
     throw parseAxiosError(error)
@@ -24,8 +24,7 @@ async function getClassById(classId: number) {
 async function getClasses() {
   try {
     const response = await axiosAuth.get(
-      // TODO : utiliser une variable d'environnement pour l'url de l'api rest
-      `http://127.0.0.1:3000/classes`
+      `${url}`
     )
     return response.data
   } catch (error) {
@@ -38,7 +37,7 @@ async function addStudent(newStudentId: number) {
     const classe = await getClassById(1)
     const classStudents = classe.studentsId
     classStudents.push(newStudentId)
-    const response = await axiosAuth.patch(`http://127.0.0.1:3000/classes/${1}`, {
+    const response = await axiosAuth.patch(`${url}/${1}`, {
       studentsId: classStudents
     })
   } catch (error) {}

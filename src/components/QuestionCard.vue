@@ -67,7 +67,7 @@ const repondre = async () => {
 <template>
   <div :class="{'ongoing': buttonClicked || priority == -1}">
     <div class="card" :class="{'urgent': priority == 0 && isTeacher}" v-if="question">
-      <p>Nom: {{ userName }}</p>
+      <p id="name">Nom: {{ userName }}</p>
       <p>Question: {{ text }}</p>
       <p>Catégorie: {{ category }}</p>
       <img v-if="question.userId == parseInt(authStore.getUserId) && !isTeacher" src="/src/assets/man-raising-hand.png" alt="Lever la main" class="raise-hand-img" @click="raiseHand" :style="{ opacity: handRaised}" name="hand">

@@ -53,7 +53,6 @@ const selectOption = async (option: string) => {
 }
 
 const addCategory = () => {
-  console.log(category.value)
   questionStore.addCategory(category.value)
   category.value = ''
 }
