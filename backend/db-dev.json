@@ -2,7 +2,7 @@
   "users": [
     {
       "email": "test@test.com",
-      "password": "$2a$12$xYrVIY4FsnJuyg/PRPsCv.w/bAt4nm9CO.MDPd.64GH8LUTa3F7Dq",
+      "password": "$2a$10$t8nugmZx7SCr0woR89NIhu49jR6Iqz3q7GfC8fiEsne05NTJ9DNym",
       "name": "Emmett Brown",
       "id": 1,
       "role": "teacher",
@@ -14,7 +14,7 @@
       "name": "Shapoo",
       "id": 2,
       "role": "student",
-      "health": 50
+      "health": 60
     },
     {
       "email": "stud2@stud.com",
@@ -42,7 +42,10 @@
     },
     {
       "email": "mon@courriel.com",
-      "password": "$2a$10$IQmLRv30x2WSwZbdlgL0ke97fKKRevrdUTO.CR2uSk9p6h280TLJq",
+      "password": "$2a$10$1yrDWsxYTkpsj9KyjPJCDer2vTlIEWVFrIpBz1fnEvM98uR/rfW/2",
+      "name": "Bruce Lee",
+      "role": "teacher",
+      "health": 100,
       "id": 6
     }
   ],
@@ -64,18 +67,6 @@
       "question": "J'ai brisé la machine à voyager dans le temps.",
       "id": 3,
       "priority": 5
-    },
-    {
-      "userid": 3,
-      "question": "Comment creer une question?",
-      "priority": 4,
-      "id": 4
-    },
-    {
-      "userid": 3,
-      "question": "Comment creer une autre question?",
-      "priority": 5,
-      "id": 5
     }
   ],
   "classes": [

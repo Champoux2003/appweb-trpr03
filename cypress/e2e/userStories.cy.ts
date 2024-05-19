@@ -3,7 +3,8 @@ describe('Récits utilisateur', () => {
   const user = {
     email: 'mon@courriel.com',
     password: 'monmotdepasse',
-    name: 'Bruce Lee'
+    name: 'Bruce Lee',
+    
   }
 
   // Exécuté avant chaque test

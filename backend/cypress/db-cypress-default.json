@@ -1,7 +1,22 @@
 {
   "users": [
-  
+    
   ],
-  "comments": [
+  "questions": [
+
+
+    
+  ],
+  "classes": [
+    {
+      "id": 1,
+      "teacherId": 1,
+      "name": "App Web",
+      "studentsId": [2
+      ]
+    }
+  ],
+  "categories": [
+
   ]
 }
