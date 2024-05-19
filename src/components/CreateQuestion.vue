@@ -11,6 +11,8 @@ const questionStore = useQuestionStore()
 const userStore = useUserStore()
 const authStore = useAuthStore()
 
+const emit = defineEmits(['question-created'])
+
 defineRule('isRequired', required)
 const isRequired = 'isRequired'
 
@@ -45,11 +47,15 @@ const register = async () => {
   newQuestion.priority = priority.value
   newQuestion.category = category.value
 
+  console.log(newQuestion)
+
   question.value = ''
   priority.value = 0
   category.value = ''
 
   await questionStore.createQuestion(newQuestion)
+
+  emit('question-created')
 }
 </script>
 <template>

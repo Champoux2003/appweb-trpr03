@@ -36,8 +36,7 @@ const routes = [
     name: 'Register',
     component: () => import('../views/RegisterView.vue'),
     meta: {
-      requiresAuth: true,
-      // requiresTeacher: true a faire
+      requiresAuth: true
     }
   },
   {

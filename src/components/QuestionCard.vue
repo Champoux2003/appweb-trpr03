@@ -9,7 +9,8 @@ const userStore = useUserStore()
 const authStore = useAuthStore()
 const userName = ref('')
 const props = defineProps({
-  id: Number
+  id: Number,
+  isTeacher: Boolean
 })
 const id = props.id
 const question = ref(null)
@@ -17,26 +18,21 @@ const priority = ref(0)
 const text = ref('')
 const category = ref('')
 
-const isTeacher = ref(false)
+const isTeacher = props.isTeacher
 const user = ref(null)
 
 onMounted(async () => {
   try {
     question.value = await questionStore.getQuestionById(id)
-    await userStore.getUserById(question.value?.userId)
+
+    const userId = question.value?.userId
+    await userStore.getUserById(userId)
     user.value = userStore.user
+    
     userName.value = user.value?.name
     priority.value = question.value?.priority
     category.value = question.value?.category 
     text.value = question.value?.question 
- 
-    const userId = authStore.getUserId
-    const loggedInUser = await userStore.getUserById(parseInt(userId))
-    if (loggedInUser.role !== 'teacher') {
-      isTeacher.value = false
-    } else {
-      isTeacher.value = true
-    }
   } catch (error) {}
 })
 

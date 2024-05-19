@@ -33,7 +33,7 @@ async function getQuestionById(questionId: number) {
 async function createQuestion(question: Question) {
   try {
     const response = await axiosAuth.post(
-      `${url}`, { userid: question.userId, question: question.question, priority: question.priority, category: question.category.name })
+      `${url}`, { userId: question.userId, question: question.question, priority: question.priority, category: question.category.name })
     return response.data
   } catch (error) {
     throw parseAxiosError(error)
