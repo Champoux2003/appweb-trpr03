@@ -52,9 +52,11 @@ const deleteStudent = async () => {
 <template>
   <div class="student-card col-9" v-if="student" :class="getColor.value">
     <h3>{{ student.name }}</h3>
-    <button class="btn-green" @click="changeHealth(10)" v-if="isTeacher">+</button>
-    <button class="btn-red" @click="changeHealth(-10)" v-if="isTeacher">-</button>
-    <button class="close-button" name="delete" @click="deleteStudent()" v-if="isTeacher">X</button>
+    <button class="btn-green" @click="changeHealth(10)" v-if="isTeacher" name="addHealth">+</button>
+    <button class="btn-red" @click="changeHealth(-10)" v-if="isTeacher" name="removeHealth">
+      -
+    </button>
+    <button class="close-button" name="kill" @click="deleteStudent()" v-if="isTeacher">X</button>
   </div>
 </template>
 

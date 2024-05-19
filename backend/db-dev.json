@@ -2,7 +2,7 @@
   "users": [
     {
       "email": "test@test.com",
-      "password": "$2a$12$xYrVIY4FsnJuyg/PRPsCv.w/bAt4nm9CO.MDPd.64GH8LUTa3F7Dq",
+      "password": "$2a$10$t8nugmZx7SCr0woR89NIhu49jR6Iqz3q7GfC8fiEsne05NTJ9DNym",
       "name": "Emmett Brown",
       "id": 1,
       "role": "teacher",
@@ -14,7 +14,7 @@
       "name": "Shapoo",
       "id": 2,
       "role": "student",
-      "health": 50
+      "health": 60
     },
     {
       "email": "stud2@stud.com",
@@ -62,40 +62,15 @@
       "id": 3,
       "priority": 5,
       "category": "Bogue"
-    },
-    {
-      "userid": 3,
-      "question": "Comment creer une question?",
-      "priority": 4,
-      "category": "Aide",
-      "id": 4
-    },
-    {
-      "userid": 3,
-      "question": "asdas",
-      "priority": 4,
-      "category": "Aide",
-      "id": 5
-    },
-    {
-      "userid": 3,
-      "question": "Comment creer une question?",
-      "priority": 3,
-      "category": "Aide",
-      "id": 6
     }
+
   ],
   "classes": [
     {
       "id": 1,
       "teacherId": 1,
       "name": "App Web",
-      "studentsId": [
-        2,
-        3,
-        4,
-        5
-      ]
+      "studentsId": [2, 3, 4, 5]
     }
   ],
   "categories": [

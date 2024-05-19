@@ -4,7 +4,6 @@ import { useQuestionStore } from '@/stores/questionStore'
 import { useUserStore } from '@/stores/userStore'
 import { useAuthStore } from '@/stores/authStore'
 
-
 const questionStore = useQuestionStore()
 const userStore = useUserStore()
 const authStore = useAuthStore()
@@ -21,7 +20,6 @@ const category = ref('')
 const isTeacher = ref(false)
 const user = ref(null)
 
-
 onMounted(async () => {
   try {
     question.value = await questionStore.getQuestionById(id)
@@ -35,13 +33,11 @@ onMounted(async () => {
     const userId = authStore.getUserId
     const loggedInUser = await userStore.getUserById(parseInt(userId))
     if (loggedInUser.role !== 'teacher') {
-        isTeacher.value = false
+      isTeacher.value = false
     } else {
-        isTeacher.value = true
+      isTeacher.value = true
     }
-
-  } catch (error) {
-  }
+  } catch (error) {}
 })
 
 const deleteQuestion = () => {
@@ -51,7 +47,8 @@ const deleteQuestion = () => {
 
 const handRaised = ref(1)
 
-const raiseHand = async() => { // allows to raise and lower hand raising the hand makes the question priority 1
+const raiseHand = async () => {
+  // allows to raise and lower hand raising the hand makes the question priority 1
   if (handRaised.value === 1) {
     questionStore.raiseHand(id)
   } else {
@@ -59,9 +56,7 @@ const raiseHand = async() => { // allows to raise and lower hand raising the han
   }
   handRaised.value = handRaised.value === 1 ? 0.5 : 1
   question.value = await questionStore.getQuestionById(id)
-  
 }
-
 </script>
 <template>
   <div>
@@ -70,10 +65,11 @@ const raiseHand = async() => { // allows to raise and lower hand raising the han
       <p>Question: {{ text }}</p>
       <p>Catégorie: {{ category }}</p>
       <img v-if="!isTeacher" src="/src/assets/man-raising-hand.png" alt="Lever la main" class="raise-hand-img" @click="raiseHand" :style="{ opacity: handRaised}">
-
       <div class="button-group">
         <button class="btn btn-primary" @click="">Répondre</button>
-        <button class="btn btn-danger" @click="deleteQuestion()">Supprimer</button>
+        <button class="btn btn-danger" name="deleteQuestion" @click="deleteQuestion()">
+          Supprimer
+        </button>
       </div>
     </div>
   </div>

@@ -41,20 +41,25 @@ const cancelEdit = () => {
     <h1>Profile</h1>
     <div>
       <p v-if="!editingName">
-        Nom: {{ name }} <button class="btn btn-primary" @click="editingName = true">⚙️</button>
+        Nom: {{ name }}
+        <button class="btn btn-primary" name="editName" @click="editingName = true">⚙️</button>
       </p>
       <p v-else>
-        <input type="text" v-model="newName" :placeholder="name" />
-        <button class="btn btn-primary" @click="saveName">Sauvegarder</button>
+        <input type="text" name="name-input" v-model="newName" :placeholder="name" />
+        <button class="btn btn-primary" name="saveName" @click="saveName">Sauvegarder</button>
         <button class="btn btn-secondary" @click="cancelEdit">Annuler</button>
       </p>
     </div>
     <div>Courriel: {{ email }}</div>
     <div>Rôle: {{ role }}</div>
-    <RouterLink :class="{ active: $route.name == 'ChangeCredentials' }"
-      :to="{ name: 'ChangeCredentials', params: { form: 'password' } }">
-      Changer le mot de passe
-    </RouterLink>
+    <button class="btn btn-secondary" name="passwordChange">
+      <RouterLink
+        :class="{ active: $route.name == 'ChangeCredentials' }"
+        :to="{ name: 'ChangeCredentials', params: { form: 'password' } }"
+      >
+        Changer le mot de passe
+      </RouterLink>
+    </button>
   </div>
 </template>
 
