@@ -73,6 +73,14 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
       onError.value = true;
     }
   }
+  async function getCategories() {
+    try {
+      onError.value = false;
+      return await questionService.getCategories();
+    } catch (error) {
+      onError.value = true;
+    }
+  }
 
   return {
     questions,
@@ -84,5 +92,6 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
     raiseHand,
     lowerHand,
     addCategory,
+    getCategories,
   };
 });

@@ -64,6 +64,18 @@
       "question": "J'ai brisé la machine à voyager dans le temps.",
       "id": 3,
       "priority": 5
+    },
+    {
+      "userid": 3,
+      "question": "Comment creer une question?",
+      "priority": 4,
+      "id": 4
+    },
+    {
+      "userid": 3,
+      "question": "Comment creer une autre question?",
+      "priority": 5,
+      "id": 5
     }
   ],
   "classes": [

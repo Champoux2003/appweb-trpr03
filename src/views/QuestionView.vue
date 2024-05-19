@@ -25,7 +25,7 @@ onMounted(async () => {
     if (loggedInUser.value.role === 'teacher') {
       isTeacher.value = true
     }
-    
+
     if (questionStore.onError) {
       confirm("Une erreur s'est produite lors de la récupération des questions.")
     }
@@ -77,7 +77,9 @@ const addCategory = () => {
           <input type="text" class="form-control form-control-sm" placeholder="Ajouter une catégorie" v-model="category"/>
           <button type="button" class="btn btn-primary btn-sm" @click="addCategory()">Ajouter</button>
         </div>
-
+        <div class="input-group" v-else-if="!isTeacher">
+          <CreateQuestion />
+        </div>
       </div>
 
       <div>
@@ -101,8 +103,6 @@ img {
 .input-group {
   display: flex;
   justify-content: space-between;
-  width: 300px;  /* Adjust as needed */
+  width: 300px;
 }
-
-
 </style>
