@@ -2,8 +2,12 @@
 import { ref, onMounted } from 'vue'
 import { useQuestionStore } from '@/stores/questionStore'
 import { useUserStore } from '@/stores/userStore'
+import { useAuthStore } from '@/stores/authStore'
+
+
 const questionStore = useQuestionStore()
 const userStore = useUserStore()
+const authStore = useAuthStore()
 const userName = ref('')
 const props = defineProps({
   id: Number
@@ -15,6 +19,7 @@ const text = ref('')
 const isTeacher = ref(false)
 const user = ref(null)
 
+
 onMounted(async () => {
   try {
     question.value = await questionStore.getQuestionById(id)
@@ -23,6 +28,15 @@ onMounted(async () => {
     userName.value = user.value?.name
     priority.value = question.value.priority
     text.value = question.value.question
+
+    const userId = authStore.getUserId
+    const loggedInUser = await userStore.getUserById(parseInt(userId))
+    if (loggedInUser.role !== 'teacher') {
+        isTeacher.value = false
+    } else {
+        isTeacher.value = true
+    }
+
   } catch (error) {
   }
 })
@@ -54,7 +68,7 @@ const raiseHand = async() => { // allows to raise and lower hand raising the han
       
       <!-- temporaire -->
       <p>Priorité: {{ question.priority }}</p>
-      <img src="/src/assets/man-raising-hand.png" alt="Lever la main" class="raise-hand-img" @click="raiseHand" :style="{ opacity: handRaised}">
+      <img v-if="!isTeacher" src="/src/assets/man-raising-hand.png" alt="Lever la main" class="raise-hand-img" @click="raiseHand" :style="{ opacity: handRaised}">
 
       <div class="button-group">
         <button class="btn btn-primary" @click="">Répondre</button>
