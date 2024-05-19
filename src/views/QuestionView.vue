@@ -22,7 +22,7 @@ onMounted(async () => {
     await userStore.getUserById(parseInt(authStore.getUserId))
     loggedInUser.value = userStore.user
 
-    if (loggedInUser.value.role === 'teacher') {
+    if (loggedInUser.value?.role === 'teacher') {
       isTeacher.value = true
     }
 
@@ -52,6 +52,11 @@ const selectOption = (option: string) => {
 const addCategory = () => {
   console.log(category.value)
   questionStore.addCategory(category.value)
+  category.value = ''
+}
+
+const updateQuestions = async() => {
+  questionStore.getQuestionsList()
 }
 </script>
 <template>
@@ -78,7 +83,7 @@ const addCategory = () => {
           <button type="button" class="btn btn-primary btn-sm" @click="addCategory()">Ajouter</button>
         </div>
         <div class="input-group" v-else-if="!isTeacher">
-          <CreateQuestion />
+          <CreateQuestion @question-created="updateQuestions"/>
         </div>
       </div>
 

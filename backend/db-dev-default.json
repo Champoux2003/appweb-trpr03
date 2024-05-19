@@ -46,19 +46,22 @@
       "userId": 2,
       "question": "J'ai inventé la machine à voyager dans le temps.",
       "id": 1,
-      "priority": 1 
+      "priority": 1,
+      "category": "Bogue"
     },
     {
       "userId": 2,
       "question": "J'ai utilisé la machine à voyager dans le temps.",
       "id": 2,
-      "priority": 2 
+      "priority": 2,
+      "category": "Aide"
     },
     {
       "userId": 2,
       "question": "J'ai brisé la machine à voyager dans le temps.",
       "id": 3,
-      "priority": 5
+      "priority": 5,
+      "category": "Bogue" 
     }
 
   ],

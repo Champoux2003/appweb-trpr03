@@ -5,7 +5,6 @@ import { required } from '@vee-validate/rules'
 import { useQuestionStore } from '@/stores/questionStore'
 import { useUserStore } from '@/stores/userStore'
 import { useAuthStore } from '@/stores/authStore'
-import { required } from '@vee-validate/rules'
 
 
 const questionStore = useQuestionStore()

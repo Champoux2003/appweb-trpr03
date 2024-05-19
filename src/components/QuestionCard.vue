@@ -16,6 +16,8 @@ const id = props.id
 const question = ref(null)
 const priority = ref(0)
 const text = ref('')
+const category = ref('')
+
 const isTeacher = ref(false)
 const user = ref(null)
 
@@ -23,12 +25,13 @@ const user = ref(null)
 onMounted(async () => {
   try {
     question.value = await questionStore.getQuestionById(id)
-    await userStore.getUserById(question.value.userId)
+    await userStore.getUserById(question.value?.userId)
     user.value = userStore.user
     userName.value = user.value?.name
-    priority.value = question.value.priority
-    text.value = question.value.question
-
+    priority.value = question.value?.priority
+    category.value = question.value?.category 
+    text.value = question.value?.question 
+ 
     const userId = authStore.getUserId
     const loggedInUser = await userStore.getUserById(parseInt(userId))
     if (loggedInUser.role !== 'teacher') {
@@ -65,9 +68,7 @@ const raiseHand = async() => { // allows to raise and lower hand raising the han
     <div class="card" v-if="question">
       <p>Nom: {{ userName }}</p>
       <p>Question: {{ text }}</p>
-      
-      <!-- temporaire -->
-      <p>Priorité: {{ question.priority }}</p>
+      <p>Catégorie: {{ category }}</p>
       <img v-if="!isTeacher" src="/src/assets/man-raising-hand.png" alt="Lever la main" class="raise-hand-img" @click="raiseHand" :style="{ opacity: handRaised}">
 
       <div class="button-group">

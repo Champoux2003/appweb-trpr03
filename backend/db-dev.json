@@ -9,6 +9,14 @@
       "health": 100
     },
     {
+      "email": "stud@stud.com",
+      "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
+      "name": "Shapoo",
+      "id": 2,
+      "role": "student",
+      "health": 50
+    },
+    {
       "email": "stud2@stud.com",
       "password": "$2a$10$OJCVQBhMnelCf7LMM9yL0OMMIHO.dxOddupYcmnV/DY0QWB5BgAQu",
       "name": "Shampooing",
@@ -33,7 +41,50 @@
       "health": 80
     }
   ],
-  "questions": [],
+  "questions": [
+    {
+      "userId": 2,
+      "question": "J'ai inventé la machine à voyager dans le temps.",
+      "id": 1,
+      "priority": 1,
+      "category": "Bogue"
+    },
+    {
+      "userId": 2,
+      "question": "J'ai utilisé la machine à voyager dans le temps.",
+      "id": 2,
+      "priority": 2,
+      "category": "Aide"
+    },
+    {
+      "userId": 2,
+      "question": "J'ai brisé la machine à voyager dans le temps.",
+      "id": 3,
+      "priority": 5,
+      "category": "Bogue"
+    },
+    {
+      "userid": 3,
+      "question": "Comment creer une question?",
+      "priority": 4,
+      "category": "Aide",
+      "id": 4
+    },
+    {
+      "userid": 3,
+      "question": "asdas",
+      "priority": 4,
+      "category": "Aide",
+      "id": 5
+    },
+    {
+      "userid": 3,
+      "question": "Comment creer une question?",
+      "priority": 3,
+      "category": "Aide",
+      "id": 6
+    }
+  ],
   "classes": [
     {
       "id": 1,
@@ -41,11 +92,6 @@
       "name": "App Web",
       "studentsId": [
         2,
-        3,
-        4,
-        5
-      ],
-      "studentId": [
         3,
         4,
         5
