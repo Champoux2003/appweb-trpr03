@@ -47,7 +47,7 @@ const changePassword = () => {
         />
       </div>
     </div>
-    <button class="btn btn-primary" type="submit" @click="changePassword()">
+    <button class="btn btn-primary" id="submit-btn" type="submit" @click="changePassword()">
       Changer le mot de passe
     </button>
   </form>

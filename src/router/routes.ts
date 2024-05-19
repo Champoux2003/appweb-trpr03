@@ -3,6 +3,7 @@ import ProfileView from '../views/ProfileView.vue'
 import LoginView from '../views/LoginView.vue'
 
 
+
 const routes = [
   {
     path: '/',
@@ -20,7 +21,10 @@ const routes = [
   {
     path: '/question',
     name: 'Question',
-    component: () => import('../views/QuestionView.vue')  
+    component: () => import('../views/QuestionView.vue'),
+    meta: {
+      requiresAuth: true
+    }  
   },
   {
     path: '/login',
@@ -30,7 +34,10 @@ const routes = [
   {
     path: '/register',
     name: 'Register',
-    component: () => import('../views/RegisterView.vue')
+    component: () => import('../views/RegisterView.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/:pathMatch(.*)*',
@@ -41,12 +48,18 @@ const routes = [
     path : "/change-Credentials/:form",
     name : "ChangeCredentials",
     component : () => import('../views/ChangeCredentials.vue'),
-    props: true
+    props: true,
+    meta: {
+      requiresAuth: true
+    }  
   },
   {
     path : "/classe",
     name : "Classe",
-    component : () => import('../views/Classroom.vue')
+    component : () => import('../views/Classroom.vue'),
+    meta: {
+      requiresAuth: true
+    }  
   }
 ]
 

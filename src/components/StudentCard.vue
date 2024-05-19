@@ -52,6 +52,7 @@ const deleteStudent = async () => {
 <template>
   <div class="student-card col-9" v-if="student" :class="getColor.value">
     <h3>{{ student.name }}</h3>
+    <h5>Points de vie: {{ student.health }}</h5>
     <button class="btn-green" @click="changeHealth(10)" v-if="isTeacher" name="addHealth">+</button>
     <button class="btn-red" @click="changeHealth(-10)" v-if="isTeacher" name="removeHealth">
       -
@@ -69,8 +70,8 @@ const deleteStudent = async () => {
   margin: 10px;
   min-width: 300px;
   max-width: 300px;
-  min-height: 120px;
-  max-height: 120px;
+  min-height: fit-content;
+  max-height: fit-content;
 }
 
 .btn-green {

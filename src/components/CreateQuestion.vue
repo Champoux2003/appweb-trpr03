@@ -4,14 +4,18 @@ import { Field, Form, ErrorMessage, defineRule, validate } from 'vee-validate'
 import { useQuestionStore } from '@/stores/questionStore'
 import { useUserStore } from '@/stores/userStore'
 import { useAuthStore } from '@/stores/authStore'
+import { required } from '@vee-validate/rules'
 
 
 const questionStore = useQuestionStore()
 const userStore = useUserStore()
 const authStore = useAuthStore()
 
+const emit = defineEmits(['question-created'])
+
 defineRule('isRequired', required)
 const isRequired = 'isRequired'
+
 
 
 const categories = ref([])
@@ -39,41 +43,46 @@ const register = async () => {
   }
 
   newQuestion.userId = await parseInt(authStore.getUserId)
-  newQuestion.question = question.value
+  newQuestion.question = question.value as any
   newQuestion.priority = priority.value
-  newQuestion.category = category.value
+  newQuestion.category = category.value as any
+
+  console.log(newQuestion)
 
   question.value = ''
   priority.value = 0
-  category.value = ''
+  category.value = '' 
 
   await questionStore.createQuestion(newQuestion)
+
+  emit('question-created')
 }
 </script>
 <template>
   <div class="card">
     <div class="row justify-content-center">
-      <Form @submit="register">
+      <Form>
         <div class="mb-3">
           <label for="question" class="form-label">Question</label>
-          <Field type="text" class="form-control" id="question" name="question" :rules="isRequired" v-model="question" placeholder="Entrez une question"/>
+          <Field type="text" class="form-control" id="question-input" name="question-input" :rules="isRequired" v-model="question" placeholder="Entrez une question"/>
+          <ErrorMessage class="text-danger" name="question-input-error" />
         </div>
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="priority" class="form-label">Priorité</label>
-            <select class="form-control" id="priority" name="priority" :rules="isRequired" v-model="priority">
+            <select class="form-control" id="priority-select" name="priority-select" :rules="isRequired" v-model="priority">
               <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
             </select>
           </div>
           <div class="col-md-6 mb-3">
             <label for="category" class="form-label">Catégorie</label>
-            <select class="form-control" id="category" name="category" :rules="isRequired" v-model="category" placeholder="Choisir une categorie">
+            <select class="form-control" id="category-select" name="category-select" :rules="isRequired" v-model="category">
               <option v-for="n in categories" :value="n">{{ n.name }}</option>
             </select>
             <ErrorMessage class="text-danger" name="category" />
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Créer</button>
+        <button v-if="question != '' && category != '' && priority != 0" type="submit" id="submit-btn" name="submit-question" class="btn btn-primary" @click="question != '' && category != '' && priority != 0 ? register() : null">Créer</button>
       </Form>
     </div>
   </div>

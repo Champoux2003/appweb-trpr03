@@ -50,7 +50,7 @@ function logout() {
         </RouterLink>
       </div>
       <div class="d-flex">
-        <div class="navbar-nav ml-auto">
+        <div class="navbar-nav ml-auto" id="login-logout">
           <a class="nav-link" @click="logout" v-if="isLoggedIn" href="#"> Se déconnecter </a>
           <RouterLink v-else class="nav-link" :class="{ active: $route.name == 'Login' }" :to="{ name: 'Login' }">
             Connexion
