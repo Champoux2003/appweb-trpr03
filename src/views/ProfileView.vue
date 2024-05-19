@@ -51,20 +51,10 @@ const cancelEdit = () => {
     </div>
     <div>Courriel: {{ email }}</div>
     <div>Rôle: {{ role }}</div>
-    <RouterLink
-      :class="{ active: $route.name == 'ChangeCredentials' }"
-      :to="{ name: 'ChangeCredentials', params: { form: 'password' } }"
-    >
+    <RouterLink :class="{ active: $route.name == 'ChangeCredentials' }"
+      :to="{ name: 'ChangeCredentials', params: { form: 'password' } }">
       Changer le mot de passe
     </RouterLink>
-    <div>
-      <RouterLink
-        :class="{ active: $route.name == 'ChangeCredentials' }"
-        :to="{ name: 'ChangeCredentials', params: { form: 'email' } }"
-      >
-        Changer le courriel
-      </RouterLink>
-    </div>
   </div>
 </template>
 
