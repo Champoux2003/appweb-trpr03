@@ -82,6 +82,6 @@ export const useProfileStore = defineStore('profileStoreId', () => {
     getProfile,
     updateProfileName,
     deleteProfile,
-     changePassword
+    changePassword
   }
 })

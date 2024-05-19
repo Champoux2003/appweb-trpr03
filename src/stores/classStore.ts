@@ -23,10 +23,19 @@ export const useClassStore = defineStore('classStore', () => {
         }
     }
 
+    async function deleteStudentFromClass(studentId: number) {
+        try {
+            await classService.deleteStudentFromClass(studentId)
+            return true
+        } catch (error) {
+            return false
+        }
+    }
     return {
         getClassById,
         getClasses,
         classes,
-        classe
+        classe,
+        deleteStudentFromClass,
     }
 })

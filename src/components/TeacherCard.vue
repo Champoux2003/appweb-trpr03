@@ -13,30 +13,21 @@ const authStore = useAuthStore()
 const colors = ['red', 'yellow', 'green', 'god']
 
 const props = defineProps({
-    id: Number
+    id: Number,
+    isTeacher: Boolean
 })
 const id = props.id
+const isTeacher = props.isTeacher
 
 const teacher = ref(null)
-const isTeacher = ref(false)
-let color = ref('') 
+let color = ref('')
 
 onMounted(async () => {
     await userStore.getUserById(id)
     teacher.value = userStore.user
-    const userId = authStore.getUserId
-    const loggedInUser = await userStore.getUserById(userId)
-    if (loggedInUser.role !== 'teacher') {
-        isTeacher.value = false
-    } else {
-        isTeacher.value = true
-    }
-
-
-
 })
 
-const getColor =computed(() => {
+const getColor = computed(() => {
     const health = teacher.value?.health
     if (health <= 30)
         return ref(colors[0])
@@ -59,8 +50,9 @@ const changeHealth = async (healthChange: number) => {
 <template>
     <div class="teacher-card col-9" v-if="teacher" :class="getColor.value">
         <h3>{{ teacher.name }}</h3>
-        <button class="btn-green" @click="changeHealth(10)" v-if="!isTeacher">+</button>
-        <button class="btn-red" @click="changeHealth(-10)" v-if="!isTeacher">-</button>
+        <h5>Points de vie: {{ teacher.health }}</h5>
+        <button class="btn-green" @click="changeHealth(10)" name="addHealth" v-if="!isTeacher">+</button>
+        <button class="btn-red" @click="changeHealth(-10)" name="removeHealth" v-if="!isTeacher">-</button>
     </div>
 </template>
 
@@ -74,8 +66,8 @@ const changeHealth = async (healthChange: number) => {
     margin: 10px;
     min-width: 300px;
     max-width: 300px;
-    min-height: 120px;
-    max-height: 120px;
+    min-height: fit-content;
+    max-height: fit-content;
 }
 
 .btn-green {
@@ -84,7 +76,7 @@ const changeHealth = async (healthChange: number) => {
     font-size: large;
     width: 50px;
     height: 50px;
-    border-radius: 10px; 
+    border-radius: 10px;
     padding: 10px;
     margin-right: 10px;
 }
@@ -94,29 +86,32 @@ const changeHealth = async (healthChange: number) => {
     color: black;
     width: 50px;
     height: 50px;
-    border-radius: 10px; 
+    border-radius: 10px;
     padding: 10px;
 }
 
 
 .red {
-  width: 20%;
-  padding: 10px;
-  background-image: url(/src/assets/red.png);
+    width: 20%;
+    padding: 10px;
+    background-image: url(/src/assets/red.png);
 }
+
 .god {
-  width: 20%;
-  padding: 10px;
-  background-image: url(/src/assets/rainbow.gif);
+    width: 20%;
+    padding: 10px;
+    background-image: url(/src/assets/rainbow.gif);
 }
+
 .green {
-  width: 20%;
-  padding: 10px;
-  background-image: url(/src/assets/green.png);
+    width: 20%;
+    padding: 10px;
+    background-image: url(/src/assets/green.png);
 }
+
 .yellow {
-  width: 20%;
-  padding: 10px;
-  background-image: url(/src/assets/yellow.png);
+    width: 20%;
+    padding: 10px;
+    background-image: url(/src/assets/yellow.png);
 }
 </style>

@@ -9,31 +9,32 @@ const userStore = useUserStore()
 const authStore = useAuthStore()
 const userName = ref('')
 const props = defineProps({
-  id: Number
+  id: Number,
+  isTeacher: Boolean
 })
 const id = props.id
 const question = ref(null)
-const priority = ref(0)
+const priority = ref(null)
 const text = ref('')
-const isTeacher = ref(false)
+const category = ref('')
+
+const isTeacher = props.isTeacher
 const user = ref(null)
+
+
 
 onMounted(async () => {
   try {
     question.value = await questionStore.getQuestionById(id)
-    await userStore.getUserById(question.value.userId)
-    user.value = userStore.user
-    userName.value = user.value?.name
-    priority.value = question.value.priority
-    text.value = question.value.question
 
-    const userId = authStore.getUserId
-    const loggedInUser = await userStore.getUserById(parseInt(userId))
-    if (loggedInUser.role !== 'teacher') {
-      isTeacher.value = false
-    } else {
-      isTeacher.value = true
-    }
+    const userId = question.value?.userId
+    await userStore.getUserById(userId)
+    user.value = userStore.user
+    
+    userName.value = user.value?.name
+    priority.value = question.value?.priority
+    category.value = question.value?.category 
+    text.value = question.value?.question 
   } catch (error) {}
 })
 
@@ -48,33 +49,31 @@ const raiseHand = async () => {
   // allows to raise and lower hand raising the hand makes the question priority 1
   if (handRaised.value === 1) {
     questionStore.raiseHand(id)
+    priority.value = 0 as any
   } else {
     questionStore.lowerHand(id, priority.value)
+    priority.value = question.value?.priority as any
   }
   handRaised.value = handRaised.value === 1 ? 0.5 : 1
   question.value = await questionStore.getQuestionById(id)
 }
+const buttonClicked = ref(false)
+const repondre = async () => {
+  questionStore.repondre(id)
+  buttonClicked.value = true
+}
+
 </script>
 <template>
-  <div>
-    <div class="card" v-if="question">
-      <p>Nom: {{ userName }}</p>
+  <div :class="{'ongoing': buttonClicked || priority == -1}">
+    <div class="card" :class="{'urgent': priority == 0 && isTeacher}" v-if="question">
+      <p id="name">Nom: {{ userName }}</p>
       <p>Question: {{ text }}</p>
-
-      <!-- temporaire -->
-      <p>Priorité: {{ question.priority }}</p>
-      <img
-        v-if="!isTeacher"
-        src="/src/assets/man-raising-hand.png"
-        alt="Lever la main"
-        class="raise-hand-img"
-        @click="raiseHand"
-        :style="{ opacity: handRaised }"
-      />
-
+      <p>Catégorie: {{ category }}</p>
+      <img v-if="question.userId == parseInt(authStore.getUserId) && !isTeacher" src="/src/assets/man-raising-hand.png" alt="Lever la main" class="raise-hand-img" @click="raiseHand" :style="{ opacity: handRaised}" name="hand">
       <div class="button-group">
-        <button class="btn btn-primary" @click="">Répondre</button>
-        <button class="btn btn-danger" name="deleteQuestion" @click="deleteQuestion()">
+        <button class="btn btn-primary" name="repondre" @click="repondre()" v-if="isTeacher">Répondre</button>
+        <button class="btn btn-danger" name="deleteQuestion" @click="deleteQuestion()" v-if="buttonClicked || isTeacher || question.userId == parseInt(authStore.getUserId)">
           Supprimer
         </button>
       </div>
@@ -82,10 +81,19 @@ const raiseHand = async () => {
   </div>
 </template>
 <style scoped>
+.ongoing > .card {
+  background-image: url(/src/assets/yellow.png);
+}
+.urgent {
+  background-image: url(/src/assets/red.png);
+}
+
 .card {
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   position: relative;
+  padding: 10px;
+  margin-top: 20px;
 }
 
 .button-group {

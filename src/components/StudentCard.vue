@@ -2,34 +2,31 @@
 import { ref, computed, watchEffect } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import { useAuthStore } from '@/stores/authStore'
+import { useClassStore } from '@/stores/classStore'
 import { defineProps } from 'vue'
 import { onMounted } from 'vue'
 
 const userStore = useUserStore()
-const authStore = useAuthStore()
+const classStore = useClassStore()
 
 const colors = ['red', 'yellow', 'green', 'god']
 
 const props = defineProps({
-  id: Number
+  id: Number,
+  isTeacher: Boolean
 })
+
 const id = props.id
+const isTeacher = props.isTeacher
 
 const student = ref(null)
-const isTeacher = ref(false)
+
 
 let color = ref('')
 
 onMounted(async () => {
   await userStore.getUserById(id)
   student.value = userStore.user
-  const userId = authStore.getUserId
-  const loggedInUser = await userStore.getUserById(userId)
-  if (loggedInUser.role !== 'teacher') {
-    isTeacher.value = false
-  } else {
-    isTeacher.value = true
-  }
 })
 
 const getColor = computed(() => {
@@ -48,12 +45,14 @@ const changeHealth = async (healthChange: number) => {
 
 const deleteStudent = async () => {
   await userStore.deleteUser(id)
+  await classStore.deleteStudentFromClass(id)
   student.value = null
 }
 </script>
 <template>
   <div class="student-card col-9" v-if="student" :class="getColor.value">
     <h3>{{ student.name }}</h3>
+    <h5>Points de vie: {{ student.health }}</h5>
     <button class="btn-green" @click="changeHealth(10)" v-if="isTeacher" name="addHealth">+</button>
     <button class="btn-red" @click="changeHealth(-10)" v-if="isTeacher" name="removeHealth">
       -
@@ -71,8 +70,8 @@ const deleteStudent = async () => {
   margin: 10px;
   min-width: 300px;
   max-width: 300px;
-  min-height: 120px;
-  max-height: 120px;
+  min-height: fit-content;
+  max-height: fit-content;
 }
 
 .btn-green {

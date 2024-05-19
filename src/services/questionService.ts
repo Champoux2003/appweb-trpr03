@@ -8,6 +8,7 @@ interface Question {
   userId: number,
   question: string,
   priority: number,
+  category: string,
 }
 async function getAllQuestions() {
   try {
@@ -32,7 +33,7 @@ async function getQuestionById(questionId: number) {
 async function createQuestion(question: Question) {
   try {
     const response = await axiosAuth.post(
-      `${url}`, { userid: question.userId, question: question.question, priority: question.priority })
+      `${url}`, { userId: question.userId, question: question.question, priority: question.priority, category: question.category.name })
     return response.data
   } catch (error) {
     throw parseAxiosError(error)
@@ -52,7 +53,7 @@ async function deleteQuestion(questionId: number) {
 async function raiseHand(questionId: number) {
   try {
     await axiosAuth.patch(
-      `${url}/${questionId}`, {priority: 1})
+      `${url}/${questionId}`, {priority: 0})
   }catch (error) {
     throw parseAxiosError(error)
   }
@@ -68,10 +69,20 @@ async function lowerHand(questionId: number, priority: number) {
   }
 }
 
+async function repondre(questionId: number) {
+  try {
+    await axiosAuth.patch(
+      `${url}/${questionId}`, {priority: -1})
+  }catch (error) {
+    throw parseAxiosError(error)
+  }
+
+}
+
 async function addCategory(category: string) {
   try {
     await axiosAuth.post(
-      `${urlCategory}`, {category: category})
+      `${urlCategory}`, {name: category})
   }catch (error) {
     throw parseAxiosError(error)
   }
@@ -97,4 +108,5 @@ export const questionService = {
   lowerHand,
   addCategory,
   getCategories,
+  repondre,
 }

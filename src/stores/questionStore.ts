@@ -82,6 +82,14 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
     }
   }
 
+  async function repondre(questionId: number) {
+    try {
+      onError.value = false;
+      await questionService.repondre(questionId);
+    } catch (error) {
+      onError.value = true;
+    }
+  }
   return {
     questions,
     onError,
@@ -93,5 +101,6 @@ export const useQuestionStore = defineStore("questionStoreId", () => {
     lowerHand,
     addCategory,
     getCategories,
+    repondre,
   };
 });

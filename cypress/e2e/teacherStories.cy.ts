@@ -10,7 +10,7 @@ describe('Récits enseignant', () => {
   const student = {
     name: 'Chuck Norris',
     email: 'champ@champ.com',
-    password: 'champ',
+    password: 'test',
     role: 'student',
     health: 50
   }
@@ -58,11 +58,20 @@ describe('Récits enseignant', () => {
     cy.contains(/déconnecter/i)
   })
 
+  it('je peux me déconnecter', () => {
+    cy.login(student.email, student.password)
+
+    cy.contains(/déconnecter/i).click()
+    cy.contains(/se connecter/i)
+  })
+
   it('je peux ajouter un étudiant', () => {
     cy.login(teacher.email, teacher.password)
+    
     cy.visit('/register')
-    cy.get('input[name=name-input]').type(student.name)
-    cy.get('input[name=email-input]').type(student.email)
+    cy.get('input[name=name-input]').click()
+    cy.get('input[name=name-input]').type("new student")
+    cy.get('input[name=email-input]').type("newEmail@email.com")
     cy.get('input[name=password-input]').type(student.password)
     cy.get('input[name=password-confirm-input]').type(student.password)
     cy.get('button[type=submit]').click()
@@ -147,4 +156,11 @@ describe('Récits enseignant', () => {
     cy.contains(/question/i)
   })
 
+  it('je peux repondre à une question', () => {
+    cy.login(teacher.email, teacher.password)
+
+    cy.visit('/question')
+    cy.get('button[name=repondre]').click()
+    cy.contains(/question/i)
+  })
 })
