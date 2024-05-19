@@ -63,6 +63,17 @@ export const useProfileStore = defineStore('profileStoreId', () => {
     }
   }
 
+  async function changePassword(password : string) {
+    try {
+      onError.value = false
+      const authStore = useAuthStore()
+      const userId = authStore.getUserId // Assuming getUserId is a computed or a ref inside authStore
+      await userService.changePassword(parseInt(userId),password)
+    } catch (error) {
+      onError.value = true
+    }
+  }
+
   return { 
     email, 
     name, 
@@ -70,6 +81,7 @@ export const useProfileStore = defineStore('profileStoreId', () => {
     onError, 
     getProfile,
     updateProfileName,
-    deleteProfile
+    deleteProfile,
+     changePassword
   }
 })

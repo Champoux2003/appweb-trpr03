@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
-import { Field, Form, ErrorMessage, defineRule, validate } from 'vee-validate'
-import { required } from '@vee-validate/rules'
-import { useAuthStore } from '../stores/authStore'
-import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/userStore'
+import router from '@/router'
+import { useProfileStore } from '@/stores/profileStore'
+import { ref } from 'vue'
 
+const profileStore = useProfileStore()
+const password = ref('')
 
+const changePassword = () => {
+  profileStore.changePassword(password.value)
+  router.push({ name: 'Profile' })
+}
 </script>
 <template>
   <h1>Changer le mot de passe</h1>
@@ -29,6 +32,7 @@ import { useUserStore } from '@/stores/userStore'
           class="form-control"
           id="new-password"
           name="new-password"
+          v-model="password"
           rules="required"
         />
       </div>
@@ -43,6 +47,8 @@ import { useUserStore } from '@/stores/userStore'
         />
       </div>
     </div>
-    <button class="btn btn-primary" type="submit">Changer le mot de passe</button>
+    <button class="btn btn-primary" type="submit" @click="changePassword()">
+      Changer le mot de passe
+    </button>
   </form>
 </template>

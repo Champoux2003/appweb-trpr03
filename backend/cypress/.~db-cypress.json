@@ -17,7 +17,15 @@
       "id": 2
     }
   ],
-  "questions": [],
+  "questions": [
+    {
+      "userId": 2,
+      "question": "J'ai inventé la machine à voyager dans le temps.",
+      "priority": 1,
+      "category": "chuck",
+      "id": 1
+    }
+  ],
   "classes": [
     {
       "id": 1,

@@ -85,6 +85,17 @@ async function healthChange(healthChange: number, userId: string) {
   }
 }
 
+async function changePassword(userId: number, password: string) {
+  try {
+    await axiosAuth.patch(
+      `${url}/${userId}`, {password: password}
+    )
+  }
+  catch (error) {
+    throw parseAxiosError(error)
+  }
+}
+
 
 export const userService = {
   getUserById,
@@ -92,5 +103,6 @@ export const userService = {
   updateUserById,
   createUser,
   deleteUser,
-  healthChange
+  healthChange,
+  changePassword
 }

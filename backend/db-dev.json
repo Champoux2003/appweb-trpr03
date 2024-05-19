@@ -2,7 +2,7 @@
   "users": [
     {
       "email": "test@test.com",
-      "password": "$2a$12$xYrVIY4FsnJuyg/PRPsCv.w/bAt4nm9CO.MDPd.64GH8LUTa3F7Dq",
+      "password": "$2a$10$t8nugmZx7SCr0woR89NIhu49jR6Iqz3q7GfC8fiEsne05NTJ9DNym",
       "name": "Emmett Brown",
       "id": 1,
       "role": "teacher",
@@ -14,7 +14,7 @@
       "name": "Shapoo",
       "id": 2,
       "role": "student",
-      "health": 50
+      "health": 60
     },
     {
       "email": "stud2@stud.com",

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { Field, Form, ErrorMessage, defineRule, validate } from 'vee-validate'
-import { required } from '@vee-validate/rules'
 import { useQuestionStore } from '@/stores/questionStore'
 import { useUserStore } from '@/stores/userStore'
 import { useAuthStore } from '@/stores/authStore'
@@ -26,13 +25,13 @@ onMounted(async () => {
   categories.value = await questionStore.getCategories()
 })
 
+
 const register = async () => {
   // Validation manuelle avant la soumission
   const result = await validate({}, {}, {})
   if (!result.valid) {
     return // Arrête la fonction si la validation échoue
   }
-  
   const newQuestion = {
     userId: 0,
     question: '',

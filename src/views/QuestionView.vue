@@ -39,13 +39,11 @@ const selectedOption = ref('Plus récent')
 const selectOption = (option: string) => {
   selectedOption.value = option
   if (option === 'Plus récent') {
-    questionsList.value.sort((a, b) => a.id - b.id); // sort by id
-  }
-  else if (option === 'Plus ancien') {
-    questionsList.value.sort((a, b) => b.id - a.id); // sort by id descending
-  }
-  else if (option === 'Priorité') {
-    questionsList.value.sort((a, b) => a.priority - b.priority); // sort by priority
+    questionsList.value.sort((a, b) => a.id - b.id) // sort by id
+  } else if (option === 'Plus ancien') {
+    questionsList.value.sort((a, b) => b.id - a.id) // sort by id descending
+  } else if (option === 'Priorité') {
+    questionsList.value.sort((a, b) => a.priority - b.priority) // sort by priority
   }
 }
 
@@ -59,7 +57,12 @@ const addCategory = () => {
     <div>
       <h1>Question</h1>
       <div class="btn-group">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <button
+          type="button"
+          class="btn btn-primary dropdown-toggle"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
           {{ selectedOption }}
         </button>
         <ul class="dropdown-menu">
@@ -74,8 +77,21 @@ const addCategory = () => {
       </div>
       <div>
         <div class="input-group" v-if="isTeacher">
-          <input type="text" class="form-control form-control-sm" placeholder="Ajouter une catégorie" v-model="category"/>
-          <button type="button" class="btn btn-primary btn-sm" @click="addCategory()">Ajouter</button>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            placeholder="Ajouter une catégorie"
+            name="categoryName"
+            v-model="category"
+          />
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            name="categoryBtn"
+            @click="addCategory()"
+          >
+            Ajouter
+          </button>
         </div>
         <div class="input-group" v-else-if="!isTeacher">
           <CreateQuestion />
