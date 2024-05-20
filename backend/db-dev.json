@@ -61,34 +61,16 @@
       "question": "J'ai brisé la machine à voyager dans le temps.",
       "id": 3,
       "priority": 5,
-      "category": "Bogue"
-    },
-    {
-      "userId": 3,
-      "question": "asAS",
-      "priority": 3,
-      "category": "Bogue",
-      "id": 4
-    },
-    {
-      "userId": 3,
-      "question": "Comment ",
-      "priority": 2,
-      "category": "Bogue",
-      "id": 5
+      "category": "Bogue" 
     }
+
   ],
   "classes": [
     {
       "id": 1,
       "teacherId": 1,
       "name": "App Web",
-      "studentsId": [
-        2,
-        3,
-        4,
-        5
-      ]
+      "studentsId": [2, 3, 4, 5]
     }
   ],
   "categories": [
