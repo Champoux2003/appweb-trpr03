@@ -22,7 +22,7 @@ const isTeacher = props.isTeacher
 const user = ref(null)
 
 
-
+const handRaised = ref(1)
 onMounted(async () => {
   try {
     question.value = await questionStore.getQuestionById(id)
@@ -35,6 +35,12 @@ onMounted(async () => {
     priority.value = question.value?.priority
     category.value = question.value?.category 
     text.value = question.value?.question 
+
+    if (question.value?.priority === 0) {
+      handRaised.value = 0.5
+    } else {
+      handRaised.value = 1
+    }
   } catch (error) {}
 })
 
@@ -43,18 +49,20 @@ const deleteQuestion = () => {
   question.value = null
 }
 
-const handRaised = ref(1)
+
 
 const raiseHand = async () => {
   // allows to raise and lower hand raising the hand makes the question priority 1
   if (handRaised.value === 1) {
     questionStore.raiseHand(id)
     priority.value = 0 as any
+    handRaised.value = 0.5
   } else {
-    questionStore.lowerHand(id, priority.value)
+    questionStore.lowerHand(id, 5)// on remet la priorité à 5 car si on baisse la main ce n'est plus une priorité
     priority.value = question.value?.priority as any
+    handRaised.value = 1
   }
-  handRaised.value = handRaised.value === 1 ? 0.5 : 1
+  
   question.value = await questionStore.getQuestionById(id)
 }
 const buttonClicked = ref(false)

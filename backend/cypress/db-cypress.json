@@ -2,15 +2,15 @@
   "users": [
     {
       "email": "mon@courriel.com",
-      "password": "$2a$10$OuZ7CGXkE3GAMJSUGisB9.SjpbKIU9fZs5QQ.K.ApI/VWZDaHfsDC",
+      "password": "$2a$10$z6Vcm6dgkNp9.jZqYbK5TeAKypyaxvuWy2OwLFG7wpQvONAtA6hji",
       "name": "Bruce Lee",
       "role": "teacher",
-      "health": 100,
+      "health": 110,
       "id": 1
     },
     {
       "email": "champ@champ.com",
-      "password": "$2a$10$rI.Wv083opoFz63FNpSpceioaPKwQOc9pcIsxkibRBSbnVijUJ1SO",
+      "password": "$2a$10$gWlZxP7IaGR2Fbg9rdLLGuggNBLlwNg15yht2JT2t6K2dRPhi.5AC",
       "name": "Chuck Norris",
       "role": "student",
       "health": 50,
@@ -19,9 +19,9 @@
   ],
   "questions": [
     {
-      "userId": 2,
+      "userId": 1,
       "question": "J'ai inventé la machine à voyager dans le temps.",
-      "priority": -1,
+      "priority": 1,
       "category": "chuck",
       "id": 1
     }
@@ -32,7 +32,8 @@
       "teacherId": 1,
       "name": "App Web",
       "studentsId": [
-        2
+        2,
+        1
       ]
     }
   ],

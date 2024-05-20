@@ -135,7 +135,7 @@ const register = async () => {
                     <div class="p-3 mb-2 bg-danger text-white" v-if="authServiceError">
                         {{ authServiceError }}
                     </div>
-                    <button class="btn btn-primary" type="submit">Se connecter</button>
+                    <button class="btn btn-primary" type="submit">Ajouter l'étudiant</button>
                 </Form>
             </div>
         </div>

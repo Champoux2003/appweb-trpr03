@@ -48,7 +48,7 @@ async function deleteStudentFromClass(studentId: number) {
     const classe = await getClassById(1)
     const classStudents = classe.studentsId
     const newStudents = classStudents.filter((id: number) => id !== studentId)
-    await axiosAuth.patch(`${url}/1`, {studentId: newStudents})
+    await axiosAuth.patch(`${url}/1`, {studentsId: newStudents})
   }catch(error){
     throw parseAxiosError(error)
   }

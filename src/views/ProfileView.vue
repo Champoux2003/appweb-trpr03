@@ -42,7 +42,7 @@ const cancelEdit = () => {
     <div>
       <p v-if="!editingName">
         Nom: {{ name }}
-        <button class="btn btn-primary" name="editName" @click="editingName = true">⚙️</button>
+        <button v-if="role == 'teacher'" class="btn btn-primary" name="editName" @click="editingName = true">⚙️</button>
       </p>
       <p v-else>
         <input type="text" name="name-input" v-model="newName" :placeholder="name" />
