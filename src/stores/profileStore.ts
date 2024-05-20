@@ -21,7 +21,7 @@ export const useProfileStore = defineStore('profileStoreId', () => {
       onError.value = false
       const authStore = useAuthStore()
       const userId = authStore.getUserId // Assuming getUserId is a computed or a ref inside authStore
-      const profile = await userService.getUserById(userId)
+      const profile = await userService.getUserById(parseInt(userId))
       _initializeProfile(profile)
     } catch (error) {
       onError.value = true
@@ -46,7 +46,7 @@ export const useProfileStore = defineStore('profileStoreId', () => {
       console.log("ProfileStore");
       const userId = authStore.getUserId
       console.log(userId) // Assuming getUserId is a computed or a ref inside authStore
-      await userService.updateUserById(userId, newName);
+      await userService.updateUserById(parseInt(userId), newName);
       name.value = newName
     } catch (error) {
       onError.value = true
@@ -57,7 +57,7 @@ export const useProfileStore = defineStore('profileStoreId', () => {
       onError.value = false
       const authStore = useAuthStore()
       const userId = authStore.getUserId // Assuming getUserId is a computed or a ref inside authStore
-      await userService.deleteUser(userId)
+      await userService.deleteUser(parseInt(userId))
     } catch (error) {
       onError.value = true
     }

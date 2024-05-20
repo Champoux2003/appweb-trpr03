@@ -72,7 +72,7 @@ async function deleteUser(userId: number) {
   }
 }
 
-async function healthChange(healthChange: number, userId: string) {
+async function healthChange(healthChange: number, userId: number) {
   try {
     const user = await getUserById(userId)
     const newHealth = user.health + healthChange

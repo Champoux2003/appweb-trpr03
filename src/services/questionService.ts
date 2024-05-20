@@ -4,12 +4,7 @@ import axiosAuth from '../shared/axiosAuth'
 const url = 'http://127.0.0.1:3000/666/questions'
 const urlCategory = 'http://127.0.0.1:3000/666/categories'
 
-interface Question {
-  userId: number,
-  question: string,
-  priority: number,
-  category: string,
-}
+
 async function getAllQuestions() {
   try {
     const response = await axiosAuth.get(
@@ -30,7 +25,7 @@ async function getQuestionById(questionId: number) {
   }
 }
 
-async function createQuestion(question: Question) {
+async function createQuestion(question: any) {
   try {
     const response = await axiosAuth.post(
       `${url}`, { userId: question.userId, question: question.question, priority: question.priority, category: question.category.name })

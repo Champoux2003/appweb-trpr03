@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import { userService } from '../services/userService'
-import { useAuthStore } from './authStore'
+
 import { classService } from '@/services/classService'
 import { ref } from 'vue'
-import type { bool } from 'aws-sdk/clients/signer'
+
 
 export const useUserStore = defineStore('userStore', () => {
     const users = ref([])
@@ -41,7 +41,7 @@ export const useUserStore = defineStore('userStore', () => {
 
     async function healthChange(healthChange: number, userId: number) {
         try {
-            await userService.healthChange(healthChange, userId.toString())
+            await userService.healthChange(healthChange, userId)
         } catch (error) {
         }
     }

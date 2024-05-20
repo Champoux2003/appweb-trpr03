@@ -3,7 +3,7 @@
     {
       "email": "test@test.com",
       "password": "$2a$12$xYrVIY4FsnJuyg/PRPsCv.w/bAt4nm9CO.MDPd.64GH8LUTa3F7Dq",
-      "name": "Emmett Brown",
+      "name": "dfssdfsdfsdf",
       "id": 1,
       "role": "teacher",
       "health": 100
@@ -64,18 +64,11 @@
       "category": "Bogue"
     },
     {
-      "userId": 3,
-      "question": "asAS",
-      "priority": 3,
+      "userId": 2,
+      "question": "dfsdsfsdfsdf",
+      "priority": 0,
       "category": "Bogue",
       "id": 4
-    },
-    {
-      "userId": 3,
-      "question": "Comment ",
-      "priority": 2,
-      "category": "Bogue",
-      "id": 5
     }
   ],
   "classes": [
@@ -87,7 +80,14 @@
         2,
         3,
         4,
-        5
+        5,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
       ]
     }
   ],
