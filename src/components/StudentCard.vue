@@ -27,6 +27,8 @@ let color = ref('')
 onMounted(async () => {
   await userStore.getUserById(id)
   student.value = userStore.user
+
+  
 })
 
 const getColor = computed(() => {

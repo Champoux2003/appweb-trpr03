@@ -36,5 +36,4 @@ describe('CreateQuestion', () => {
         // Check if the createQuestion function was called
         expect(store.createQuestion).toHaveBeenCalled()
     })
-    
 })
