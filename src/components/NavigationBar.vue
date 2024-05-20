@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useAuthStore } from '../stores/authStore'
 import { RouterLink, useRouter } from 'vue-router'
 import { useProfileStore } from '../stores/profileStore'
+
 
 const authStore = useAuthStore()
 const profileStore = useProfileStore()
@@ -19,6 +20,13 @@ function logout() {
     name: 'Login'
   })
 }
+//make sure we are logged out when the component is mounted
+onMounted(() => {
+  logout()
+  router.push({
+    name: 'Home'
+  })
+})
 </script>
 
 <template>

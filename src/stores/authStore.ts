@@ -9,7 +9,7 @@ interface DecodedToken {
   exp: number
 }
 export const useAuthStore = defineStore('authStoreId', () => {
-  const token = ref('')
+  const token = ref(null)
   const authServiceError = ref('')
 
   const isLoggedIn = computed(() => !!token.value)
